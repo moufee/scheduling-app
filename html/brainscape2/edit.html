@@ -1,0 +1,39 @@
+<nav>
+    <ul class="nav nav-pills nav-justified">
+        <li><a href="#/">Home</a> </li>
+    </ul>
+</nav>
+<div ng-controller="EditCtrl">
+    <label>Set Title:</label>
+    <input type="text" ng-model="setTitle" class="form-control">
+    <div class="row" ng-repeat="(cardID,card) in cards">
+        <div class="col-sm-5">
+            <label>Term:</label><input type="text" class="form-control" ng-model = "card.term"></div>
+        <div class="col-sm-6">
+            <label>Definition:</label>
+            <input type="text" class="form-control" ng-model = "card.definition">
+        </div>
+        <div class="col-sm-1">
+            <br>
+            <button class="btn btn-danger" ng-click="deleteCard(cardID)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+        <form ng-submit="addCard()">
+            <div class="row">
+                <div class="col-sm-5">
+                <label>Term:</label><input type="text" ng-model="addTerm"  id="addTerm" class="form-control" >
+                </div>
+            <div class="col-sm-6">
+                <label>Definition:</label>
+                <input type="text" ng-model="addDefinition" ng-keydown="keyAddCard()" ng-keypress="keyAddCard()"  class="form-control">
+                </div>
+                </div>
+        <div class="row">
+            <div class="col-sm-12">
+            <br>
+            <input class="btn btn-default" type="submit" value="Add Card">
+            </div>
+
+</div>
+        </form>
+            </div>

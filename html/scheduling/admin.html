@@ -1,0 +1,63 @@
+
+<ul class="nav nav-pills nav-justified">
+    <li class=""><a href="#/">Submit Request</a></li>
+    <li class=""><a href="#/myrequests">My Requests</a></li>
+    <li class="active"><a href="#/admin">All Requests</a></li>
+</ul>
+<h2 class="alert alert-danger" ng-show="alertErrorVisible">{{alertErrorText}}</h2>
+<div ng-hide="resolutions=='permissionError'">
+    <h1>Resolutions Overview</h1>
+    <button class="btn btn-primary pull-right" ng-click="refresh()">Refresh</button>
+    <p ng-cloak ng-hide="resolutions.length==0||resolutions==null">Click on the dates to display and hide details.</p>
+    <br><br>
+    <!--<p>Search:</p>-->
+    <!--<div class="row">
+        <div class="col-md-3">
+            <select class="form-control" ng-model="filterOption">
+                <option value="requester">Requester Name</option>
+                <option value="position">Position</option>
+                <option value = "weekendDate">Date</option>
+            </select>
+        </div>
+        <div class="col-md-9">
+            <input type="text" class="form-control" value=" " ng-model="searchText">
+        </div>
+    </div>-->
+    <br>
+    <h4 ng-class="{'alert alert-success':true,'hidden':!alertVisible}">{{alertSuccessText}}</h4>
+    <p ng-show="resolutions.length==0" ng-cloak>There are no requests in the system.</p>
+    <div ng-cloak ng-repeat="(index,resolution) in resolutions" class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">
+                <a ng-class="{'expired':resolution.isExpired,'cancelled':resolution.isCancelled,'resolved':resolution.isResolved}" data-toggle="collapse" data-target=".collapse-{{index}}" href=""><span ng-show="resolution.isCancelled">Cancelled: </span>
+                    <span ng-show="resolution.isExpired">Expired:</span>
+                    {{resolution.requester.name}} - {{resolution.position}} - {{resolution.weekendDate}}</a></h2>
+        </div>
+        <div class="collapse collapse-{{index}}">
+            <div class="panel-body">
+                <button class="btn btn-danger pull-right" ng-click="deleteResolution(resolution.resolutionID)">Delete this request</button>
+
+                <button ng-hide="resolution.isExpired||resolution.isCancelled||resolution.isResolved" class="btn btn-warning pull-right" ng-click="cancelResolution(resolution.resolutionID)">Cancel this request</button>
+                <p>Position: {{resolution.position}}</p>
+                <p>Resolved: <span ng-show="resolution.isResolved">Yes</span><span ng-hide="resolution.isResolved">No</span></p>
+                <p ng-hide="resolution.resolver==null" class="resolver">Resolver: {{resolution.resolver.name}}</p>
+                <p>Creation Date: {{resolution.creationDate_unix*1000|date:'medium'}}</p>
+                <p>Expiration Date: {{resolution.expirationDate_unix*1000|date:'medium'}}</p>
+                <p>Is Expired: {{resolution.isExpired}}</p>
+                <p>Is Cancelled: {{resolution.isCancelled}}</p>
+                <h3>Contacts:</h3>
+                <ol>
+                    <li ng-repeat="contact in resolution.contacts">
+
+                        <p>{{contact.name}}</p>
+                        <p>Current Weekend: {{contact.currentlyScheduledWeekend}}</p>
+                        <p>Email: {{contact.email}}</p>
+                        <p>Response: {{contact.response}}<span ng-show="contact.response==null">(has not responded yet)</span></p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+

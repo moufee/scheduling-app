@@ -1,0 +1,42 @@
+<ul class="nav nav-pills nav-justified">
+    <li class=""><a href="#/">Submit Request</a></li>
+    <li class="active"><a href="#/myrequests">My Requests</a></li>
+    <li ng-show="isAdmin"><a href="#/admin">All Requests</a></li>
+</ul>
+
+<h1>My Requests</h1>
+        <p>{{status}}</p>
+<button class="btn btn-primary pull-right" ng-click="refresh()">Refresh</button>
+<p ng-cloak ng-hide="resolutions.length==0||resolutions==null">Click on the dates to display and hide details.</p>
+        <br><br><br>
+<h4 ng-class="{'alert alert-success':true,'hidden':!alertVisible}">{{alertSuccessText}}</h4>
+<h4 ng-class="{'alert alert-danger':true,'hidden':!alertErrorVisible}">{{alertErrorText}}</h4>
+        <p ng-show="resolutions.length==0" ng-cloak>You don't have any requests.</p>
+<div ng-cloak ng-repeat="(index,resolution) in resolutions" class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <a ng-class="{'expired':resolution.isExpired,'cancelled':resolution.isCancelled,'resolved':resolution.isResolved}" data-toggle="collapse" data-target=".collapse-{{index}}" href=""><span ng-show="resolution.isCancelled">Cancelled: </span>
+                <span ng-show="resolution.isExpired">Expired:</span>
+                {{resolution.position}} - {{resolution.weekendDate}}</a></h2>
+    </div>
+    <div class="collapse collapse-{{index}}">
+        <div class="panel-body">
+            <button ng-hide="resolution.isExpired||resolution.isCancelled||resolution.isResolved" class="btn btn-warning pull-right" ng-click="cancelResolution(resolution.resolutionID)">Cancel this request</button>
+            <p>Position: {{resolution.position}}</p>
+            <p>Resolved: <span ng-show="resolution.isResolved">Yes</span><span ng-hide="resolution.isResolved">No</span></p>
+            <p class="resolver" ng-hide="resolution.resolver==null">Resolver: {{resolution.resolver.name}}</p>
+            <p>Creation Date: {{resolution.creationDate_unix*1000|date:'medium'}}</p>
+            <p>Expiration Date: {{resolution.expirationDate_unix*1000|date:'medium'}}</p>
+            <h3>Contacts:</h3>
+            <ol>
+                <li ng-repeat="contact in resolution.contacts">
+
+                    <p>{{contact.name}}</p>
+                    <p>Current Weekend: {{contact.currentlyScheduledWeekend}}</p>
+                    <p>Email: {{contact.email}}</p>
+                    <p>Response: {{contact.response}}<span ng-show="contact.response==null">(has not responded yet)</span></p>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

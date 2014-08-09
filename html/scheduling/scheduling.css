@@ -1,0 +1,53 @@
+body {padding-top: 5px;}
+
+.checkbox-checked-true{
+    color: green;
+    font-weight: bold;
+}
+
+#weekendOptions{
+    font-size: 16px;
+}
+
+/*.ng-invalid.ng-dirty{
+    border-color: red;
+}
+
+.ng-valid.ng-dirty{
+    border-color:green;
+}*/
+
+
+/*input[type='checkbox'] {*/
+    /*-webkit-appearance:none;*/
+    /*width:30px;*/
+    /*height:30px;*/
+    /*background:white;*/
+    /*border-radius:5px;*/
+    /*border:2px solid #555;*/
+/*}*/
+
+button{
+    margin-left: 5px;
+}
+
+.expired{
+    color: red !important;
+
+}
+.cancelled{
+    color: #f0ad4e !important;
+}
+
+.response-no{
+    color:darkred !important;
+}
+
+.resolved{
+    color: green !important;
+}
+
+.resolver{
+    font-weight: bold;
+    color: green;
+}

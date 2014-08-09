@@ -1,0 +1,42 @@
+{
+    "Weekend 1":{
+        "camera":[],
+        "Video TD":{"name":"name","email":"email@example.com"},
+        "Video Director":"",
+        "CG":"",
+        "Video Engineer":"person"
+    },
+
+
+    "Weekend 2":{
+        "camera":[],
+        "Video TD":{"name":"Ben Ferris","email":"ben.ferris1@gmail.com"},
+        "Video Director":"",
+        "CG":"",
+        "Video Engineer":"person"
+    },
+
+
+    "Weekend 3":{
+        "camera":[],
+        "Video TD":{"name":"name","email":"email@example.com"},
+        "Video Director":"",
+        "CG":"",
+        "Video Engineer":"person"
+    },
+
+
+    "Weekend 4":{
+        "camera":[],
+        "Video TD":{"name":"name","email":"email@example.com"},
+        "Video Director":"",
+        "CG":"",
+        "Video Engineer":"person"
+    }
+
+
+
+
+
+
+}

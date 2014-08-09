@@ -1,0 +1,35 @@
+<ul class="nav nav-pills nav-justified">
+    <li class="active"><a href="#/">Submit Request</a></li>
+    <li class=""><a href="#/myrequests">My Requests</a></li>
+    <li ng-show="isAdmin"><a href="#/admin">All Requests</a></li>
+</ul>
+    <h1>Submit Request</h1>
+    <h4 ng-class="{'alert alert-success':true,'hidden':!alertVisible}">{{alertSuccessText}}</h4>
+    <h4 ng-class="{'alert alert-danger':true,'hidden':!alertErrorVisible}">{{alertErrorText}}</h4>
+
+    <!--<select class="form-control" ng-model="selectedFolder" ng-options="folder.name for (index, folder) in organization.service_type_folders" required></select>
+<br>
+<select class="form-control" ng-model="selectedServiceType" ng-options="type.name for (index, type) in selectedFolder.service_types" required></select>
+{{selectedServiceType}}-->
+    <button class="btn btn-danger pull-right" data-toggle="modal" data-target="#problemModal">Report a Problem</button>
+    <h3 ng-cloak>{{status}}</h3>
+    <h4 ng-cloak>{{prompt}}</h4>
+    <select ng-cloak ng-class="{'form-control':true,'hide':!selectVisible}" ng-model="selectedWeekendID" ng-change="selectWeekend()">
+        <option value="{{plan.id}}" ng-repeat="(index,plan) in plans|filter:{'scheduled':true}">{{plan.dates}}</option>
+    </select>
+
+
+
+    <br><br>
+    <h4 ng-show="scheduledWeekends==null">{{statusMessage2}}</h4>
+    <div id="weekendOptions" ng-cloak ng-class="{hide:scheduledWeekends==null}">
+        <h4>Select the weekends that you are able to switch to:</h4>
+        <div class="" ng-repeat="plan in scheduledWeekends">
+            <label>
+                <input type="checkbox" ng-model="plan.isChecked"> <span class="checkbox-checked-{{plan.isChecked}}">{{plan.dates}}</span>
+            </label>
+        </div>
+        <button ng-cloak ng-class="{'btn':true, 'btn-primary':true,'hide':!submitVisible,'disabled':submitDisabled}" ng-click="submitResolution()">{{resolveBtnText}}</button>
+        <br><br><br>
+    </div>
+</div>
