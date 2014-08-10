@@ -35,7 +35,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http){
     $scope.alertErrorVisible=false;
     $scope.alertVisible=false;
 
-    $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
+    $http.get('getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
 
         isAdmin = data;
         $scope.isAdmin = isAdmin;
@@ -43,7 +43,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http){
 
     });
 
-    $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
+    $http.get('getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
 
 
         $scope.isAdmin = data ? true : false;
@@ -51,7 +51,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http){
 
     });
 
-    $http.get('http://beta.floret.us/scheduling/getdata.php',{'params':{'requesting':'myRequests'}}).success(function(data){
+    $http.get('getdata.php',{'params':{'requesting':'myRequests'}}).success(function(data){
         $scope.resolutions=data.reverse();
 
     })
@@ -89,7 +89,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http){
 schedulingApp.controller('adminCtrl', function ($scope,$http) {
     $scope.alertErrorVisible=false;
     $scope.status ='';
-    $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
+    $http.get('getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
 
 
         $scope.isAdmin = data ? true : false;
@@ -97,7 +97,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
 
     });
 
-    $http.get('http://beta.floret.us/scheduling/getdata.php',{'params':{'requesting':'resolutions'}}).success(function (data) {
+    $http.get('getdata.php',{'params':{'requesting':'resolutions'}}).success(function (data) {
             console.log(data);
             $scope.resolutions = data.reverse();
             if(data=='permissionError'){
@@ -168,7 +168,7 @@ schedulingApp.controller('homeCtrl',function($scope, $http){
     $scope.status2Visible = false;
     $scope.status = "Loading...";
     $scope.resolveBtnText = "Submit";
-    $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
+    $http.get('getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
 
         isAdmin = data;
         $scope.isAdmin = isAdmin;
@@ -177,7 +177,7 @@ schedulingApp.controller('homeCtrl',function($scope, $http){
         });
 
 
-    $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'me'}}).success(function(data){
+    $http.get('getdata.php',{params:{'requesting':'me'}}).success(function(data){
         user = data;
         $scope.organization = user.organization;
 
@@ -203,7 +203,7 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
             console.log(emailAddresses[i].address);
         }
 
-        $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'plans','serviceTypeID':42921}}).success(function(data){
+        $http.get('getdata.php',{params:{'requesting':'plans','serviceTypeID':42921}}).success(function(data){
             $scope.prompt = "Select a weekend on which you are unable to serve:";
             $scope.selectVisible = true;
             $scope.plans = data;
@@ -231,7 +231,7 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
         $scope.checkedWeekendsVisible = true;
         $scope.statusMessage2 = "Loading Alternate Weekends...";
         $scope.status2Visible = true;
-$http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':42921,'selectedWeekendID':$scope.selectedWeekendID,'userID':user.id}}).success(function(data){
+$http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':42921,'selectedWeekendID':$scope.selectedWeekendID,'userID':user.id}}).success(function(data){
     $scope.status2Visible = false;
     console.log(data);
     $scope.scheduledWeekends = data;
@@ -251,7 +251,7 @@ $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'
 
         var isDuplicate = false;
         //checks for duplicate
-        $http.get('http://beta.floret.us/scheduling/getdata.php',{'params':{'requesting':'myRequests'}}).success(function (data) {
+        $http.get('getdata.php',{'params':{'requesting':'myRequests'}}).success(function (data) {
             var resolutions = data;
             for (var i = 0; i < resolutions.length; i++) {
                 if (resolutions[i].requester.planningCenterID == user.id && resolutions[i].planID == $scope.selectedWeekendID&&resolutions[i].isCancelled==false) {
