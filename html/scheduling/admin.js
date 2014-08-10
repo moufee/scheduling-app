@@ -6,7 +6,7 @@ var adminConsole = angular.module('adminConsole', []);
 adminConsole.controller('adminCtrl', function ($scope,$http) {
     $scope.alertErrorVisible=false;
     $scope.status =
-    $http.get('http://beta.floret.us/scheduling/getdata.php',{'params':{'requesting':'resolutions'}}).success(function (data) {
+    $http.get('getdata.php',{'params':{'requesting':'resolutions'}}).success(function (data) {
         console.log(data);
         $scope.resolutions = data;
         if(data=='permissionError'){
@@ -15,7 +15,7 @@ adminConsole.controller('adminCtrl', function ($scope,$http) {
         }
     });
         $scope.resetResolutions = function(){
-            $http.get('http://beta.floret.us/scheduling/reset.php');
+            $http.get('reset.php');
         };
 
     $scope.refresh = function(){
@@ -27,7 +27,7 @@ adminConsole.controller('adminCtrl', function ($scope,$http) {
     $scope.deleteResolution = function (id) {
         $scope.alertErrorVisible=false;
         if(confirm("Are you sure you want to delete this request?")) {
-            $http.get('http://beta.floret.us/scheduling/reset.php', {'params': {'resolutionID': id, 'action': 'delete'}}).success(function (data) {
+            $http.get('reset.php', {'params': {'resolutionID': id, 'action': 'delete'}}).success(function (data) {
                 if (data == true)
                     location.reload();
                 else {
