@@ -150,7 +150,7 @@ function calculateExpirationDate($planToResolve){
 
     }
     else {
-        $expirationInterval = new DateInterval('P3D'); //P3D - a period of 3 days to respond if submitted more than a week in advance
+        $expirationInterval = new DateInterval('PT1M'); //P3D - a period of 3 days to respond if submitted more than a week in advance
     }
     $expirationDate = $currentDate->add($expirationInterval);
     return $expirationDate;
