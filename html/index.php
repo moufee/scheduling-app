@@ -23,7 +23,7 @@ body {
       <div class="container">
         <h1>Welcome!</h1>
         <p>This is the the beta version of my development site.</p>
-        <p><a class="btn btn-primary btn-lg" role="button" href="http://dev.floret.us/scheduling">Scheduling Page &raquo;</a></p>
+        <p><a class="btn btn-primary btn-lg" role="button" href="http://beta.floret.us/scheduling">Scheduling Page &raquo;</a></p>
       </div>
     </div>
     <div class="container">

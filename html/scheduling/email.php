@@ -19,7 +19,7 @@ try {
 //        'html' => '<p>Example HTML content</p>',
 //        'text' => 'Example text content',
         'subject' => $subject,
-        'from_email' => 'productionScheduling@dev.floret.us',
+        'from_email' => 'productionScheduling@beta.floret.us',
         'from_name' => 'Production Scheduling',
         'to' => array(
             array(
@@ -75,11 +75,11 @@ try {
                     ),
                     array(
                         'name' => 'yeslink',
-                        'content' => 'http://dev.floret.us/scheduling/respond.php?response=yes&responderID='.$personID.'&resolutionID='.$resolutionID
+                        'content' => 'http://beta.floret.us/scheduling/respond.php?response=yes&responderID='.$personID.'&resolutionID='.$resolutionID
                     ),
                     array(
                         'name' => 'nolink',
-                        'content' => 'http://dev.floret.us/scheduling/respond.php?response=no&responderID='.$personID.'&resolutionID='.$resolutionID
+                        'content' => 'http://beta.floret.us/scheduling/respond.php?response=no&responderID='.$personID.'&resolutionID='.$resolutionID
                     ),
                     array(
                         'name' => 'expirationdate',
@@ -132,7 +132,7 @@ function sendSchedulingInstructions($to,$requesterName,$requesterNewPosition,$re
 //        'html' => '<p>Example HTML content</p>',
 //        'text' => 'Example text content',
             //'subject' => $subject,
-            //'from_email' => 'productionScheduling@dev.floret.us',
+            //'from_email' => 'productionScheduling@beta.floret.us',
             //'from_name' => 'Production Scheduling',
             'to' => array(
                 array(
@@ -228,7 +228,7 @@ function sendPlainMessage($to,$subject,$message){
         'html' => $message,
 //        'text' => 'Example text content',
             'subject' => $subject,
-            'from_email' => 'scheduling-notifications@dev.floret.us',
+            'from_email' => 'scheduling-notifications@beta.floret.us',
             'from_name' => 'Production Scheduling',
             'to' => array(
                 array(
@@ -311,7 +311,7 @@ function sendRequestEmailMultipleWeekends($to,$subject,$name,$scheduledWeekends,
 //        'html' => '<p>Example HTML content</p>',
 //        'text' => 'Example text content',
             'subject' => $subject,
-            'from_email' => 'Grace-Production-Scheduling@dev.floret.us',
+            'from_email' => 'Grace-Production-Scheduling@beta.floret.us',
             'from_name' => 'Production Scheduling',
             'to' => array(
                 array(
@@ -359,11 +359,11 @@ function sendRequestEmailMultipleWeekends($to,$subject,$name,$scheduledWeekends,
                         ),
                         array(
                             'name' => 'yeslink',
-                            'content' => 'http://dev.floret.us/scheduling/respond.php?response=yes&responderID='.$personID.'&resolutionID='.$resolutionID
+                            'content' => 'http://beta.floret.us/scheduling/respond.php?response=yes&responderID='.$personID.'&resolutionID='.$resolutionID
                         ),
                         array(
                             'name' => 'nolink',
-                            'content' => 'http://dev.floret.us/scheduling/respond.php?response=no&responderID='.$personID.'&resolutionID='.$resolutionID
+                            'content' => 'http://beta.floret.us/scheduling/respond.php?response=no&responderID='.$personID.'&resolutionID='.$resolutionID
                         )
                     )
                 )
@@ -411,7 +411,7 @@ function sendCreationNotificationToRequester($to,$firstName,$weekendDate){
 //        'html' => '<p>Example HTML content</p>',
 //        'text' => 'Example text content',
             //'subject' => $subject,
-            'from_email' => 'productionScheduling@dev.floret.us',
+            'from_email' => 'productionScheduling@beta.floret.us',
             'from_name' => 'Production Scheduling',
             'to' => array(
                 array(
@@ -496,7 +496,7 @@ function sendCancellationNotification($to,$name,$position,$weekendDate){
 //        'html' => '<p>Example HTML content</p>',
 //        'text' => 'Example text content',
             //'subject' => $subject,
-            //'from_email' => 'productionScheduling@dev.floret.us',
+            //'from_email' => 'productionScheduling@beta.floret.us',
             //'from_name' => 'Production Scheduling',
             'to' => array(
                 array(

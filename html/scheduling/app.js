@@ -21,7 +21,7 @@ schedulingApp.config(function($routeProvider,$locationProvider){
 schedulingApp.controller('ErrorController',function($scope,$http){
     $scope.submitProblem = function(){
         $scope.alertErrorVisible=false;
-        $http.get('http://dev.floret.us/scheduling/email.php',{params:{'action':'sendError','message':$scope.problemText}}).success(function(data){
+        $http.get('http://beta.floret.us/scheduling/email.php',{params:{'action':'sendError','message':$scope.problemText}}).success(function(data){
             //success notification
             alert('Feedback Sent');
         });
@@ -35,7 +35,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http){
     $scope.alertErrorVisible=false;
     $scope.alertVisible=false;
 
-    $http.get('http://dev.floret.us/scheduling/getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
+    $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
 
         isAdmin = data;
         $scope.isAdmin = isAdmin;
@@ -43,7 +43,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http){
 
     });
 
-    $http.get('http://dev.floret.us/scheduling/getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
+    $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
 
 
         $scope.isAdmin = data ? true : false;
@@ -51,7 +51,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http){
 
     });
 
-    $http.get('http://dev.floret.us/scheduling/getdata.php',{'params':{'requesting':'myRequests'}}).success(function(data){
+    $http.get('http://beta.floret.us/scheduling/getdata.php',{'params':{'requesting':'myRequests'}}).success(function(data){
         $scope.resolutions=data.reverse();
 
     })
@@ -62,7 +62,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http){
             $scope.alertErrorText = '';
 
             //cancel resolution
-            $http.get('http://dev.floret.us/scheduling/reset.php',{'params':{'action':'cancel','resolutionID':id}}).success(function(data){
+            $http.get('http://beta.floret.us/scheduling/reset.php',{'params':{'action':'cancel','resolutionID':id}}).success(function(data){
                 console.log(data);
                 if(data==true) {
                     location.reload();
@@ -89,7 +89,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http){
 schedulingApp.controller('adminCtrl', function ($scope,$http) {
     $scope.alertErrorVisible=false;
     $scope.status ='';
-    $http.get('http://dev.floret.us/scheduling/getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
+    $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
 
 
         $scope.isAdmin = data ? true : false;
@@ -97,7 +97,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
 
     });
 
-    $http.get('http://dev.floret.us/scheduling/getdata.php',{'params':{'requesting':'resolutions'}}).success(function (data) {
+    $http.get('http://beta.floret.us/scheduling/getdata.php',{'params':{'requesting':'resolutions'}}).success(function (data) {
             console.log(data);
             $scope.resolutions = data.reverse();
             if(data=='permissionError'){
@@ -117,7 +117,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
             $scope.alertErrorText = '';
 
             //cancel resolution
-            $http.get('http://dev.floret.us/scheduling/reset.php',{'params':{'action':'cancel','resolutionID':id}}).success(function(data){
+            $http.get('http://beta.floret.us/scheduling/reset.php',{'params':{'action':'cancel','resolutionID':id}}).success(function(data){
                 console.log(data);
                 if(data==true) {
                     location.reload();
@@ -139,7 +139,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
     $scope.deleteResolution = function (id) {
         $scope.alertErrorVisible=false;
         if(confirm("Are you sure you want to delete this request?")) {
-            $http.get('http://dev.floret.us/scheduling/reset.php', {'params': {'resolutionID': id, 'action': 'delete'}}).success(function (data) {
+            $http.get('http://beta.floret.us/scheduling/reset.php', {'params': {'resolutionID': id, 'action': 'delete'}}).success(function (data) {
                 if (data == true)
                     location.reload();
                 else {
@@ -168,7 +168,7 @@ schedulingApp.controller('homeCtrl',function($scope, $http){
     $scope.status2Visible = false;
     $scope.status = "Loading...";
     $scope.resolveBtnText = "Submit";
-    $http.get('http://dev.floret.us/scheduling/getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
+    $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
 
         isAdmin = data;
         $scope.isAdmin = isAdmin;
@@ -177,7 +177,7 @@ schedulingApp.controller('homeCtrl',function($scope, $http){
         });
 
 
-    $http.get('http://dev.floret.us/scheduling/getdata.php',{params:{'requesting':'me'}}).success(function(data){
+    $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'me'}}).success(function(data){
         user = data;
         $scope.organization = user.organization;
 
@@ -194,7 +194,7 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
     }
 }*/
 
-        if(user.name==null) window.location = 'http://dev.floret.us/scheduling';
+        if(user.name==null) window.location = 'http://beta.floret.us/scheduling';
         $scope.status = "Hello "+user.first_name;
         console.log(data);
         console.log("User has "+data.contact_data.email_addresses.length+" email addresses.")
@@ -203,7 +203,7 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
             console.log(emailAddresses[i].address);
         }
 
-        $http.get('http://dev.floret.us/scheduling/getdata.php',{params:{'requesting':'plans','serviceTypeID':42921}}).success(function(data){
+        $http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'plans','serviceTypeID':42921}}).success(function(data){
             $scope.prompt = "Select a weekend on which you are unable to serve:";
             $scope.selectVisible = true;
             $scope.plans = data;
@@ -211,14 +211,14 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
             $scope.submitVisible = true;
         });
     }).error(function(){
-        window.location = 'http://dev.floret.us/scheduling';
+        window.location = 'http://beta.floret.us/scheduling';
     });
 
 
 
     $scope.submitProblem = function(){
         $scope.alertErrorVisible=false;
-        $http.get('http://dev.floret.us/scheduling/email.php',{params:{'action':'sendError','message':$scope.problemText}}).success(function(data){
+        $http.get('http://beta.floret.us/scheduling/email.php',{params:{'action':'sendError','message':$scope.problemText}}).success(function(data){
             //success notification
         });
         $scope.problemText = "";
@@ -231,7 +231,7 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
         $scope.checkedWeekendsVisible = true;
         $scope.statusMessage2 = "Loading Alternate Weekends...";
         $scope.status2Visible = true;
-$http.get('http://dev.floret.us/scheduling/getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':42921,'selectedWeekendID':$scope.selectedWeekendID,'userID':user.id}}).success(function(data){
+$http.get('http://beta.floret.us/scheduling/getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':42921,'selectedWeekendID':$scope.selectedWeekendID,'userID':user.id}}).success(function(data){
     $scope.status2Visible = false;
     console.log(data);
     $scope.scheduledWeekends = data;
@@ -251,7 +251,7 @@ $http.get('http://dev.floret.us/scheduling/getdata.php',{params:{'requesting':'s
 
         var isDuplicate = false;
         //checks for duplicate
-        $http.get('http://dev.floret.us/scheduling/getdata.php',{'params':{'requesting':'myRequests'}}).success(function (data) {
+        $http.get('http://beta.floret.us/scheduling/getdata.php',{'params':{'requesting':'myRequests'}}).success(function (data) {
             var resolutions = data;
             for (var i = 0; i < resolutions.length; i++) {
                 if (resolutions[i].requester.planningCenterID == user.id && resolutions[i].planID == $scope.selectedWeekendID&&resolutions[i].isCancelled==false) {
@@ -276,7 +276,7 @@ $http.get('http://dev.floret.us/scheduling/getdata.php',{params:{'requesting':'s
                 $scope.alertErrorVisible = false;
                 $scope.resolveBtnText = "Please Wait...";
                 $scope.submitDisabled = true;
-                $http.post('http://dev.floret.us/scheduling/create.php', {'action': 'createResolution','serviceTypeID':42921, 'checkedPlans': checkedWeekends, 'planID': $scope.selectedWeekendID, 'userID': user.id, 'name': user.name, 'email': emailAddresses[0].address}).success(function (data) {
+                $http.post('http://beta.floret.us/scheduling/create.php', {'action': 'createResolution','serviceTypeID':42921, 'checkedPlans': checkedWeekends, 'planID': $scope.selectedWeekendID, 'userID': user.id, 'name': user.name, 'email': emailAddresses[0].address}).success(function (data) {
                     if (data == true) {
                         $scope.resolveBtnText = "Submit";
                         $scope.submitDisabled = false;
