@@ -21,7 +21,7 @@ schedulingApp.config(function($routeProvider,$locationProvider){
 schedulingApp.controller('ErrorController',function($scope,$http){
     $scope.submitProblem = function(){
         $scope.alertErrorVisible=false;
-        $http.get('http://beta.floret.us/scheduling/email.php',{params:{'action':'sendError','message':$scope.problemText}}).success(function(data){
+        $http.get('email.php',{params:{'action':'sendError','message':$scope.problemText}}).success(function(data){
             //success notification
             alert('Feedback Sent');
         });
@@ -62,7 +62,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http){
             $scope.alertErrorText = '';
 
             //cancel resolution
-            $http.get('http://beta.floret.us/scheduling/reset.php',{'params':{'action':'cancel','resolutionID':id}}).success(function(data){
+            $http.get('reset.php',{'params':{'action':'cancel','resolutionID':id}}).success(function(data){
                 console.log(data);
                 if(data==true) {
                     location.reload();
@@ -117,7 +117,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
             $scope.alertErrorText = '';
 
             //cancel resolution
-            $http.get('http://beta.floret.us/scheduling/reset.php',{'params':{'action':'cancel','resolutionID':id}}).success(function(data){
+            $http.get('reset.php',{'params':{'action':'cancel','resolutionID':id}}).success(function(data){
                 console.log(data);
                 if(data==true) {
                     location.reload();
@@ -139,7 +139,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
     $scope.deleteResolution = function (id) {
         $scope.alertErrorVisible=false;
         if(confirm("Are you sure you want to delete this request?")) {
-            $http.get('http://beta.floret.us/scheduling/reset.php', {'params': {'resolutionID': id, 'action': 'delete'}}).success(function (data) {
+            $http.get('reset.php', {'params': {'resolutionID': id, 'action': 'delete'}}).success(function (data) {
                 if (data == true)
                     location.reload();
                 else {
@@ -218,7 +218,7 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
 
     $scope.submitProblem = function(){
         $scope.alertErrorVisible=false;
-        $http.get('http://beta.floret.us/scheduling/email.php',{params:{'action':'sendError','message':$scope.problemText}}).success(function(data){
+        $http.get('email.php',{params:{'action':'sendError','message':$scope.problemText}}).success(function(data){
             //success notification
         });
         $scope.problemText = "";
@@ -276,7 +276,7 @@ $http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':4
                 $scope.alertErrorVisible = false;
                 $scope.resolveBtnText = "Please Wait...";
                 $scope.submitDisabled = true;
-                $http.post('http://beta.floret.us/scheduling/create.php', {'action': 'createResolution','serviceTypeID':42921, 'checkedPlans': checkedWeekends, 'planID': $scope.selectedWeekendID, 'userID': user.id, 'name': user.name, 'email': emailAddresses[0].address}).success(function (data) {
+                $http.post('create.php', {'action': 'createResolution','serviceTypeID':42921, 'checkedPlans': checkedWeekends, 'planID': $scope.selectedWeekendID, 'userID': user.id, 'name': user.name, 'email': emailAddresses[0].address}).success(function (data) {
                     if (data == true) {
                         $scope.resolveBtnText = "Submit";
                         $scope.submitDisabled = false;
