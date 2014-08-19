@@ -21,13 +21,13 @@ schedulingApp.config(function($routeProvider,$locationProvider){
 schedulingApp.controller('ErrorController',function($scope,$http){
     $scope.submitProblem = function(){
         $scope.alertErrorVisible=false;
-        $http.get('email.php',{params:{'action':'sendError','message':$scope.problemText}}).success(function(data){
+        $http.get('email.php',{params:{'action':'sendError','message':$scope.problemText}}).success(function(){
             //success notification
             alert('Feedback Sent');
         });
         $scope.problemText = "";
     };
-})
+});
 
 schedulingApp.controller('myRequestsCtrl',function($scope,$http){
     $scope.isAdmin = isAdmin;
@@ -54,7 +54,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http){
     $http.get('getdata.php',{'params':{'requesting':'myRequests'}}).success(function(data){
         $scope.resolutions=data.reverse();
 
-    })
+    });
 
     $scope.cancelResolution = function(id){
         if(confirm('Are you sure you want to cancel this request?')){
@@ -77,7 +77,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http){
         }
 
 
-}
+};
 
     $scope.refresh = function(){
         location.reload();
@@ -101,7 +101,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
             console.log(data);
             $scope.resolutions = data.reverse();
             if(data=='permissionError'){
-                $scope.alertErrorText="You are not permitted to view this page."
+                $scope.alertErrorText="You are not permitted to view this page.";
                 $scope.alertErrorVisible=true;
             }
         });
@@ -132,7 +132,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
         }
 
 
-    }
+    };
 
 
 
@@ -149,7 +149,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
 
             })
         }
-    }
+    };
 
     $scope.resolutionFilter = function(value){
 
@@ -226,7 +226,7 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
         $scope.alertVisible=true;
     };
 
-    $scope.selectWeekend = function(position){
+    $scope.selectWeekend = function(){
         $scope.scheduledWeekends = null;
         $scope.checkedWeekendsVisible = true;
         $scope.statusMessage2 = "Loading Alternate Weekends...";
@@ -237,7 +237,7 @@ $http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':4
     $scope.scheduledWeekends = data;
 })
 
-    }
+    };
 
 
     $scope.submitResolution = function() {
