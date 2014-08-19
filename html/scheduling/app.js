@@ -1,6 +1,6 @@
 var schedulingApp = angular.module('schedulingApp', ['ngRoute']);
 var isAdmin = false;
-schedulingApp.config(function($routeProvider,$locationProvider){
+schedulingApp.config(function($routeProvider){
     $routeProvider.when('/',{
         controller:"homeCtrl",
         templateUrl:"home2.html"
@@ -197,9 +197,9 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
         if(user.name==null) window.location = 'http://beta.floret.us/scheduling';
         $scope.status = "Hello "+user.first_name;
         console.log(data);
-        console.log("User has "+data.contact_data.email_addresses.length+" email addresses.")
+        console.log("User has "+data.contact_data.email_addresses.length+" email addresses.");
         emailAddresses = data.contact_data.email_addresses;
-        for(i=0;i<emailAddresses.length;i++){
+        for(var i=0;i<emailAddresses.length;i++){
             console.log(emailAddresses[i].address);
         }
 

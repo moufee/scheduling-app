@@ -9,7 +9,7 @@
 //error_reporting(E_ALL);
 //ini_set("display_errors", 1);
 function error_handler($errno, $errstr, $errfile, $errline ) {
-    sendPlainMessage('ben.ferris1@gmail.com','Scheduling Error Report','Error Message: '.$errstr.'<br><br>On line '.$errline.'<br><br>In File '.$errfile);
+    sendPlainMessage('ben.ferris1@gmail.com','Scheduling Error Report','Error Message: '.$errstr.'<br><br>On line '.$errline.'<br><br>In File '.$errfile.'Error Number: '.$errno);
     echo 'An error has occurred. The developer has been notified.';
     die();
     //throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
@@ -183,7 +183,8 @@ function assembleResolution($planToResolve,$position,$peopleToContact){
     array_push($currentResolutions,$newResolution);
     if(file_put_contents('/var/www/resolutions.json',json_encode($currentResolutions))){
         return $newResolution;
-    }
+    }else
+        return false;
 
 }
 

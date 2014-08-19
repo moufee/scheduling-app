@@ -35,6 +35,7 @@ if(file_get_contents('/var/www/resolutions.json')){
             }
         }
         if($isFound){
+            /** @noinspection PhpUndefinedVariableInspection */
             if($selectedResolution->isResolved){
                 if($selectedResolution->resolver->planningCenterID==$_GET['responderID']) {
                     echo '<h1 class="alert alert-warning">You have already responded "yes" to this request.</h1>';

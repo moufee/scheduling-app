@@ -89,7 +89,8 @@ try {
             )
         ),
     );
-    $result = $mandrill->messages->sendTemplate($template_name, $template_content, $message);
+    /** @noinspection PhpUnusedLocalVariableInspection */
+    $mandrill->messages->sendTemplate($template_name, $template_content, $message);
     //print_r($result);
     /*
     Array
@@ -194,7 +195,7 @@ function sendSchedulingInstructions($to,$requesterName,$requesterNewPosition,$re
                 )
             ),
         );
-        $result = $mandrill->messages->sendTemplate($template_name, $template_content, $message);
+        $mandrill->messages->sendTemplate($template_name, $template_content, $message);
         //print_r($result);
         /*
         Array
@@ -266,7 +267,7 @@ function sendPlainMessage($to,$subject,$message){
 //                )
 //            ),
         );
-        $result = $mandrill->messages->send($message);
+        $mandrill->messages->send($message);
         //print_r($result);
         /*
         Array
@@ -369,7 +370,7 @@ function sendRequestEmailMultipleWeekends($to,$subject,$name,$scheduledWeekends,
                 )
             ),
         );
-        $result = $mandrill->messages->sendTemplate($template_name, $template_content, $message);
+        $mandrill->messages->sendTemplate($template_name, $template_content, $message);
         //print_r($result);
         /*
         Array
@@ -457,7 +458,7 @@ function sendCreationNotificationToRequester($to,$firstName,$weekendDate){
                 )
             ),
         );
-        $result = $mandrill->messages->sendTemplate($template_name, $template_content, $message);
+        $mandrill->messages->sendTemplate($template_name, $template_content, $message);
         //print_r($result);
         /*
         Array
@@ -546,7 +547,7 @@ function sendCancellationNotification($to,$name,$position,$weekendDate){
                 )
             ),
         );
-        $result = $mandrill->messages->sendTemplate($template_name, $template_content, $message);
+        $mandrill->messages->sendTemplate($template_name, $template_content, $message);
         //print_r($result);
         /*
         Array
