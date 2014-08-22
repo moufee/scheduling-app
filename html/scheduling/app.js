@@ -168,6 +168,11 @@ schedulingApp.controller('homeCtrl',function($scope, $http){
     $scope.status2Visible = false;
     $scope.status = "Loading...";
     $scope.resolveBtnText = "Submit";
+
+
+
+
+
     $http.get('getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
 
         isAdmin = data;
@@ -300,6 +305,17 @@ $http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':4
             }
         });
     };
+});
+
+schedulingApp.controller('selectionCtrl',function($scope, $http){
+   $http.get('getdata.php',{params:{'requesting':'organization'}}).success(function(data){
+    $scope.serviceTypeFolders = data.service_type_folders;
+
+
+   })
+
+
+
 });
 
 
