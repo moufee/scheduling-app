@@ -1,10 +1,12 @@
-<ul>
-    <li ng-repeat = "folder in serviceTypeFolders ">
-        <a href = "/test">{{folder.name}}</a>
-        <ul>
-            <li ng-repeat = "servicetype in folder.service_types">
-                {{servicetype.name}}
-            </li>
-        </ul>
-    </li>
-</ul>
+<h1>Select a Service Type</h1>
+<div ng-repeat="folder in serviceTypeFolders">
+    <p>{{folder.name}}</p>
+    <p ng-show="folder.service_type_folders.length>0">Folders:</p>
+    <div ng-repeat="nestedFolder in folder.service_type_folders">
+        {{folder.name}}
+    </div>
+<p>Service Types:</p>
+    <div ng-repeat="serviceType in folder.service_types">
+        {{serviceType.name}}
+    </div>
+</div>
