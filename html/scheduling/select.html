@@ -1,5 +1,10 @@
 <ul>
     <li ng-repeat = "folder in serviceTypeFolders ">
-        {{folder.name}}
+        <a href = "/test">{{folder.name}}</a>
+        <ul>
+            <li ng-repeat = "servicetype in folder.service_types">
+                {{servicetype.name}}
+            </li>
+        </ul>
     </li>
 </ul>
