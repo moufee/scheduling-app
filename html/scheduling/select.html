@@ -1,12 +1,17 @@
 <h1>Select a Service Type</h1>
-<div ng-repeat="folder in serviceTypeFolders">
+<!--<div ng-repeat="folder in serviceTypeFolders">
     <p>{{folder.name}}</p>
     <p ng-show="folder.service_type_folders.length>0">Folders:</p>
     <div ng-repeat="nestedFolder in folder.service_type_folders">
-        {{folder.name}}
+        {{nestedFolder.name}}
     </div>
 <p>Service Types:</p>
     <div ng-repeat="serviceType in folder.service_types">
         {{serviceType.name}}
     </div>
+
+</div>-->
+
+<div ng-repeat="serviceType in serviceTypes">
+    <p>{{serviceType.name}}</p>
 </div>

@@ -312,11 +312,22 @@ $http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':4
 });
 
 schedulingApp.controller('selectionCtrl',function($scope, $http){
-   $http.get('getdata.php',{params:{'requesting':'organization'}}).success(function(data){
-    $scope.serviceTypeFolders = data.service_type_folders;
-
-
-   })
+    $http.get('getdata.php',{params:{'requesting':'organization'}}).success(function(data){
+        $scope.serviceTypeFolders = data.service_type_folders;
+        $scope.serviceTypes = [];
+        //todo: use angular foreach here?
+        var currentFolder;
+        for(var i = 0;i<$scope.serviceTypeFolders.length;i++){
+            currentFolder = $scope.serviceTypeFolders[i];
+            while(currentFolder.service_type_folders.length>0){
+            currentFolder = currentFolder.service_type_folders[i];
+            }
+            if(currentFolder.service_types.length!=0){
+                for(var a = 0;a<currentFolder.service_types.length;a++)
+                $scope.serviceTypes.push({"name":currentFolder.service_types[a].name,"number":currentFolder.service_types[a].id})
+            }
+        }
+    })
 
 
 
