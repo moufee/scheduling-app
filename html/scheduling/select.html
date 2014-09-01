@@ -13,7 +13,7 @@
 </div>-->
 <h2>Folders</h2>
 <div ng-repeat="(index, folder) in currentFolder.service_type_folders">
-    <button class="btn btn-default" ng-click="currentFolder = folder" >{{folder.name}}</button>
+    <button class="btn btn-default" ng-click="selectFolder(index)">{{folder.name}}</button>
 </div>
 
 <h2>Service Types</h2>

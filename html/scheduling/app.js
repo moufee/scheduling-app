@@ -316,7 +316,11 @@ schedulingApp.controller('selectionCtrl',function($scope, $http){
         $scope.serviceTypes = [];
         //todo: use angular foreach here?
         $scope.currentFolder = data;
+$scope.selectFolder = function(index){
+    $scope.currentFolder = $scope.currentFolder.service_type_folders[index];
 
+
+}
 
 
     })
