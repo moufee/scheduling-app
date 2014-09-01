@@ -11,7 +11,12 @@
     </div>
 
 </div>-->
+<h2>Folders</h2>
+<div ng-repeat="(index, folder) in currentFolder.service_type_folders">
+    <a href onclick="currentFolder = currentFolder.service_type_folders[index]" >{{folder.name}}</a>
+</div>
 
-<div ng-repeat="serviceType in serviceTypes">
+<h2>Service Types</h2>
+<div ng-repeat="serviceType in currentFolder.service_types">
     <a href="#/submit/{{serviceType.id}}">{{serviceType.name}}</a>
 </div>
