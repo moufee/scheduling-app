@@ -321,6 +321,9 @@ schedulingApp.controller('selectionCtrl',function($scope, $http){
             currentFolder = $scope.serviceTypeFolders[i];
             while(currentFolder.service_type_folders.length>0){
             currentFolder = currentFolder.service_type_folders[i];
+                for(var a = 0;a<currentFolder.service_type_folders.length;a++){
+
+                }
             }
             if(currentFolder.service_types.length!=0){
                 for(var a = 0;a<currentFolder.service_types.length;a++)
