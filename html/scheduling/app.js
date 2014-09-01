@@ -163,7 +163,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
 
 });
 
-schedulingApp.controller('homeCtrl',function($scope, $http){
+schedulingApp.controller('homeCtrl',function($scope, $http, $routeParams){
     $scope.isAdmin = isAdmin;
     var user;
     var emailAddresses;
@@ -212,7 +212,7 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
             console.log(emailAddresses[i].address);
         }
 
-        $http.get('getdata.php',{params:{'requesting':'plans','serviceTypeID':42921}}).success(function(data){
+        $http.get('getdata.php',{params:{'requesting':'plans','serviceTypeID':$routeParams.serviceTypeID}}).success(function(data){
             $scope.prompt = "Select a weekend on which you are unable to serve:";
             $scope.selectVisible = true;
             $scope.plans = data;
@@ -240,7 +240,7 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
         $scope.checkedWeekendsVisible = true;
         $scope.statusMessage2 = "Loading Alternate Weekends...";
         $scope.status2Visible = true;
-$http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':42921,'selectedWeekendID':$scope.selectedWeekendID,'userID':user.id}}).success(function(data){
+$http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':$routeParams.serviceTypeID,'selectedWeekendID':$scope.selectedWeekendID,'userID':user.id}}).success(function(data){
     $scope.status2Visible = false;
     console.log(data);
     $scope.scheduledWeekends = data;
@@ -285,7 +285,7 @@ $http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':4
                 $scope.alertErrorVisible = false;
                 $scope.resolveBtnText = "Please Wait...";
                 $scope.submitDisabled = true;
-                $http.post('create.php', {'action': 'createResolution','serviceTypeID':42921, 'checkedPlans': checkedWeekends, 'planID': $scope.selectedWeekendID, 'userID': user.id, 'name': user.name, 'email': emailAddresses[0].address}).success(function (data) {
+                $http.post('create.php', {'action': 'createResolution','serviceTypeID':$routeParams.serviceTypeID, 'checkedPlans': checkedWeekends, 'planID': $scope.selectedWeekendID, 'userID': user.id, 'name': user.name, 'email': emailAddresses[0].address}).success(function (data) {
                     if (data == true) {
                         $scope.resolveBtnText = "Submit";
                         $scope.submitDisabled = false;
