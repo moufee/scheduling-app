@@ -4,7 +4,7 @@ schedulingApp.config(function($routeProvider){
     $routeProvider.when('/',{
         controller:"selectionCtrl",
         templateUrl:"select.html"
-    }).when('/:serviceTypeID',{
+    }).when('/submit/:serviceTypeID',{
         controller:"homeCtrl",
         templateUrl:"home2.html"
     })
