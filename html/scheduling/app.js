@@ -327,7 +327,7 @@ schedulingApp.controller('selectionCtrl',function($scope, $http){
             }
             if(currentFolder.service_types.length!=0){
                 for(var a = 0;a<currentFolder.service_types.length;a++)
-                $scope.serviceTypes.push({"name":currentFolder.service_types[a].name,"number":currentFolder.service_types[a].id})
+                $scope.serviceTypes.push({"name":currentFolder.service_types[a].name,"id":currentFolder.service_types[a].id})
             }
         }
     })
