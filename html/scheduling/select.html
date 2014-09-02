@@ -11,14 +11,15 @@
     </div>
 
 </div>-->
-<button ng-click="upFolder()" class="btn btn-default"><span class="glyphicon glyphicon-backward"></span> Back</button>
-<h2>Folders</h2>
+<button ng-show="backBtnVisible" ng-click="upFolder()" class="btn btn-default"><span class="glyphicon glyphicon-backward"></span> Back</button>
+        <br>
+<h2 ng-show="currentFolder.service_type_folders.length==0">Folders</h2>
 <div ng-repeat="(index, folder) in currentFolder.service_type_folders">
     <button class="btn btn-default" ng-click="selectFolder(index)"><span class="glyphicon glyphicon-folder-open"></span> {{folder.name}}</button>
     <br><br>
 </div>
 
-<h2>Service Types</h2>
+<h2 ng-hide="currentFolder.service_types.length==0">Service Types</h2>
 <div ng-repeat="serviceType in currentFolder.service_types">
     <a href="#/submit/{{serviceType.id}}">{{serviceType.name}}</a>
     <br>

@@ -318,10 +318,12 @@ schedulingApp.controller('selectionCtrl',function($scope, $http){
         $scope.currentFolder = data;
 $scope.selectFolder = function(index){
     $scope.currentFolder = $scope.currentFolder.service_type_folders[index];
+    $scope.backBtnVisible = true;
 
 };
         $scope.upFolder = function(){
             $scope.currentFolder = data;
+            $scope.backBtnVisible = false;
 
         }
 
