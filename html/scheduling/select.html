@@ -13,10 +13,12 @@
 </div>-->
 <h2>Folders</h2>
 <div ng-repeat="(index, folder) in currentFolder.service_type_folders">
-    <button class="btn btn-default" ng-click="selectFolder(index)">{{folder.name}}</button>
+    <button class="btn btn-default" ng-click="selectFolder(index)"><span class="glyphicon glyphicon-folder-open"></span> {{folder.name}}</button>
+    <br><br>
 </div>
 
 <h2>Service Types</h2>
 <div ng-repeat="serviceType in currentFolder.service_types">
     <a href="#/submit/{{serviceType.id}}">{{serviceType.name}}</a>
+    <br>
 </div>

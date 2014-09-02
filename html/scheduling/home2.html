@@ -14,7 +14,7 @@
     <button class="btn btn-danger pull-right" data-toggle="modal" data-target="#problemModal">Report a Problem</button>
     <h3 ng-cloak>{{status}}</h3>
     <h4 ng-cloak>{{prompt}}</h4>
-    <select ng-cloak ng-hide="plans|filter:{'scheduled':true}.length == 0 " ng-class="{'form-control':true,'hide':!selectVisible}" ng-model="selectedWeekendID" ng-change="selectWeekend()">
+    <select ng-cloak ng-hide="plans.length == 0 " ng-class="{'form-control':true,'hide':!selectVisible}" ng-model="selectedWeekendID" ng-change="selectWeekend()">
         <option value="{{plan.id}}" ng-repeat="(index,plan) in plans|filter:{'scheduled':true}">{{plan.dates}}</option>
     </select>
 

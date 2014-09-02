@@ -40,12 +40,6 @@ switch ($_GET['requesting']){
         $scheduledPlanIDs = array();
 
 
-
-
-
-
-
-
         if(isset($_GET['serviceTypeID'])&&isset($_GET['selectedWeekendID'])){
 
 
