@@ -7,7 +7,7 @@ require_once('Mandrill.php');
 function sendMessage($to,$subject,$name,$currentPosition,$currentWeekend,$neededPosition,$neededWeekend,$resolutionID,$personID,$expirationDate){
 
 try {
-    $mandrill = new Mandrill('UEQ2kKda5GmrDZcPAQsWbA');
+    $mandrill = new Mandrill('dWAFgNskdOT68V7rQxLe8g');
     $template_name = 'Scheduling Request';
     $template_content = array(
         array(
