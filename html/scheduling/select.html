@@ -11,6 +11,7 @@
     </div>
 
 </div>-->
+<button ng-click="upFolder()" class="btn btn-default"><span class="glyphicon glyphicon-backward"></span> Back</button>
 <h2>Folders</h2>
 <div ng-repeat="(index, folder) in currentFolder.service_type_folders">
     <button class="btn btn-default" ng-click="selectFolder(index)"><span class="glyphicon glyphicon-folder-open"></span> {{folder.name}}</button>

@@ -319,8 +319,11 @@ schedulingApp.controller('selectionCtrl',function($scope, $http){
 $scope.selectFolder = function(index){
     $scope.currentFolder = $scope.currentFolder.service_type_folders[index];
 
+};
+        $scope.upFolder = function(){
+            $scope.currentFolder = data;
 
-}
+        }
 
 
     })
