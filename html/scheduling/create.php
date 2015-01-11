@@ -47,7 +47,7 @@ function getPlanToResolve(){
     return $planToResolve;
 }
 
-//fetches list of all plans for 146th street service type
+//fetches list of all plans for a given service type id
 
 function getPlansOverview($serviceTypeID){
     global $oauth;
