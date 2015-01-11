@@ -197,7 +197,7 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
         if(user.name==null) window.location = 'http://dev.floret.us/scheduling';
         $scope.status = "Hello "+user.first_name;
         console.log(data);
-        console.log("User has "+data.contact_data.email_addresses.length+" email addresses.")
+        console.log("User has "+data.contact_data.email_addresses.length+" email addresses.");
         emailAddresses = data.contact_data.email_addresses;
         for(i=0;i<emailAddresses.length;i++){
             console.log(emailAddresses[i].address);

@@ -33,21 +33,12 @@ switch ($_GET['requesting']){
         break;
     case 'scheduledPlans':
 
-
         //an array to hold the plans that have have had a person scheduled in the requested position
         $scheduledPlans = array();
         //an array to hold the ids of the plans that the user is scheduled for so that requests are not sent to other people scheduled for those weekends
         $scheduledPlanIDs = array();
 
-
-
-
-
-
-
-
         if(isset($_GET['serviceTypeID'])&&isset($_GET['selectedWeekendID'])){
-
 
 
             $oauth->fetch('https://www.planningcenteronline.com/service_types/'.$_GET['serviceTypeID'].'/plans.json');
@@ -58,7 +49,6 @@ switch ($_GET['requesting']){
                     array_push($scheduledPlanIDs,$plan->id);
                 }
             }
-
 
 
             //fetches object containing overview of all plans with selected service type ID
