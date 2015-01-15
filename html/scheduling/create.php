@@ -38,10 +38,10 @@ require('Resolution.php'); //defines Resolution class
 
 
 //fetches the details of the plan to be resolved
-function getPlanToResolve(){
+function getPlanToResolve($planID){
 
-    global $oauth, $request;
-    $oauth->fetch('https://www.planningcenteronline.com/plans/'.$request->planID.'.json');
+    global $oauth;
+    $oauth->fetch('https://www.planningcenteronline.com/plans/'.$planID.'.json');
     $planJSON=$oauth->getLastResponse();
     $planToResolve = json_decode($planJSON);
     return $planToResolve;
@@ -182,7 +182,7 @@ function assembleResolution($planToResolve,$position,$peopleToContact){
     }
     array_push($currentResolutions,$newResolution);
     if(file_put_contents('/var/www/resolutions.json',json_encode($currentResolutions))){
-        return $newResolution;
+        return true;
     }else
         return false;
 
@@ -203,7 +203,7 @@ function sendCreationRequestEmails($newResolution)
 
 
 
-$planToResolve = getPlanToResolve();
+$planToResolve = getPlanToResolve($request->planID);
 if(verifyCreationTime($planToResolve)) {
     $neededPosition = getNeededPosition($planToResolve, $request->userID);
 

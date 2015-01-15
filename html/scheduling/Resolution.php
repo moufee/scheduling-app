@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Ben
- * Date: 04/07/2014
- * Time: 14:06
- */
 
 class Resolution {
     public $resolutionID;
@@ -24,20 +18,19 @@ class Resolution {
     public $isExpired;
     public $isCancelled;
 
-
-    public function __construct($date,$weekendDate,$planID,$position,$requester,$contacts,$date_unix){
-        $this->resolutionID = uniqid();
-        $this->creationDate = new DateTime();
-        $this->date_unix = $date_unix;
-        $this->date = $date;
-        $this->creationDate_unix = time();
-        $this->weekendDate = $weekendDate;
-        $this->planID = $planID;
-        $this->position = $position;
-        $this->requester = $requester;
-        $this->contacts = $contacts;
-        $this->isResolved = false;
-        $this->isExpired = false;
-        $this->isCancelled = false;
-    }
+     public function __construct($date,$weekendDate,$planID,$position,$requester,$contacts,$date_unix){
+         $this->resolutionID = uniqid();
+         $this->creationDate = new DateTime();
+         $this->date_unix = $date_unix;
+         $this->date = $date;
+         $this->creationDate_unix = time();
+         $this->weekendDate = $weekendDate;
+         $this->planID = $planID;
+         $this->position = $position;
+         $this->requester = $requester;
+         $this->contacts = $contacts;
+         $this->isResolved = false;
+         $this->isExpired = false;
+         $this->isCancelled = false;
+     }
 } 
