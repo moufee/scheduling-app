@@ -1,0 +1,6 @@
+{
+  "require": {
+    "ext-oauth": "*",
+    "ext-mongo": "*"
+  }
+}
