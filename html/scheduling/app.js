@@ -1,19 +1,17 @@
-var schedulingApp = angular.module('schedulingApp', ['ngRoute']);
+var schedulingApp = angular.module('schedulingApp', ['ngRoute','appRoutes']);
 var isAdmin = false;
 schedulingApp.config(function($routeProvider,$locationProvider){
     $routeProvider.when('/',{
         controller:"homeCtrl",
-        templateUrl:"home2.html"
+        templateUrl:"views/home2.html"
     }).when('/myrequests',{
         controller:"myRequestsCtrl",
-        templateUrl:"myrequests.html"
+        templateUrl:"views/myrequests.html"
     }).when('/admin',{
         controller:"adminCtrl",
-        templateUrl:"admin.html"
+        templateUrl:"views/admin.html"
     })
         .otherwise({redirectTo:'/'})
-
-
 });
 
 
