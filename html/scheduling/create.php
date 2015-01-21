@@ -210,9 +210,9 @@ if(verifyCreationTime($planToResolve)) {
 
     if ($newResolution = assembleResolution($planToResolve, $neededPosition, $peopleToContact)) echo true;
 
-    sendCreationRequestEmails($newResolution);
+    //sendCreationRequestEmails($newResolution);
 
-    sendCreationNotificationToRequester('benferris2@gmail.com'/*$newResolution->requester->email*/,$newResolution->requester->firstName,$newResolution->weekendDate);
+    //sendCreationNotificationToRequester('benferris2@gmail.com'/*$newResolution->requester->email*/,$newResolution->requester->firstName,$newResolution->weekendDate);
 
 }else
     echo "Please contact Kris Rinas at 317-379-3389 and he will work with you to find a trade.";
