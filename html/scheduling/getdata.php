@@ -113,6 +113,7 @@ switch ($_GET['requesting']){
 
     case 'resolutions':
         if(in_array($user->id,$authorisedAdminIDs)) {
+
             echo file_get_contents('../../resolutions.json');
         }
         else echo 'permissionError';

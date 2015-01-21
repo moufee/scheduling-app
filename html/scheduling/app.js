@@ -21,6 +21,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http,Auth){
     });
 
     $http.get('getdata.php',{'params':{'requesting':'myRequests'}}).success(function(data){
+        console.log(data);
         $scope.resolutions=data.reverse();
 
     })
