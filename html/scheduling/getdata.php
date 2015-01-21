@@ -93,7 +93,7 @@ switch ($_GET['requesting']){
         break;
     case'myRequests':
         $myRequests = array();
-        $resolutions = json_decode(file_get_contents('/var/www/resolutions.json'));
+        $resolutions = json_decode(file_get_contents('../../resolutions.json'));
         foreach($resolutions as $resolution){
         if($resolution->requester->planningCenterID==$user->id){
             array_push($myRequests,$resolution);
@@ -106,7 +106,7 @@ switch ($_GET['requesting']){
 
     case 'resolutions':
         if(in_array($user->id,$authorisedAdminIDs)) {
-            echo file_get_contents('/var/www/resolutions.json');
+            echo file_get_contents('../../resolutions.json');
         }
         else echo 'permissionError';
         break;

@@ -23,8 +23,8 @@ ini_set("display_errors", 1);
 require('email.php');
 require('Person.php');
 require('Resolution.php');
-if(file_get_contents('/var/www/resolutions.json')){
-    $resolutions = json_decode(file_get_contents('/var/www/resolutions.json'));
+if(file_get_contents('../../resolutions.json')){
+    $resolutions = json_decode(file_get_contents('../../resolutions.json'));
     if(isset($_GET['resolutionID'])&&isset($_GET['responderID'])&&isset($_GET['response'])){
         $isFound = false;
         foreach($resolutions as $index=>$resolution) {
@@ -54,7 +54,7 @@ if(file_get_contents('/var/www/resolutions.json')){
                             $selectedResolution->resolver = $contactedPerson;
                             $selectedResolution->contacts[$index]->response = 'yes';
                             $resolutions[$selectedResolutionIndex]=$selectedResolution;
-                            if(file_put_contents('/var/www/resolutions.json',json_encode($resolutions))) {
+                            if(file_put_contents('../../resolutions.json',json_encode($resolutions))) {
                                 echo '<div class="alert alert-success"><h1>Your response has been received.</h1>
                                 <h3>A scheduler has been notified to make the required changes.</h3></div>';
                                 sendSchedulingInstructions('benferris2@gmail.com',$selectedResolution->requester->name,$selectedResolution->position,$selectedResolution->resolver->currentlyScheduledWeekend,$selectedResolution->resolver->name,$selectedResolution->position,$selectedResolution->weekendDate);
@@ -72,7 +72,7 @@ if(file_get_contents('/var/www/resolutions.json')){
                         }elseif($_GET['response']=='no'){
                             $selectedResolution->contacts[$index]->response = 'no';
                             $resolutions[$selectedResolutionIndex]=$selectedResolution;
-                            if(file_put_contents('/var/www/resolutions.json',json_encode($resolutions))) {
+                            if(file_put_contents('../../resolutions.json',json_encode($resolutions))) {
                                 echo '<div class="alert alert-success"><h1>Your response has been received.</h1>
                                       <h3>You may change your response at any time by clicking the "yes" link in the email you received.</h3></div>';
                                 //email if all people have responded "no"

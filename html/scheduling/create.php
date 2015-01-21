@@ -169,7 +169,7 @@ function assembleResolution($planToResolve,$position,$peopleToContact){
     $requester = new Person($request->userID,$planToResolve->dates,$position);
     //check for duplicates and add new resolution to currently stored resolutions
 
-    $currentResolutions = json_decode(file_get_contents('/var/www/resolutions.json'));
+    $currentResolutions = json_decode(file_get_contents('../../resolutions.json'));
     $newResolution = new Resolution($date,$planToResolve->dates,$request->planID,$position,$requester,$peopleToContact,$time);
     $newResolution->expirationDate = calculateExpirationDate($planToResolve);
     $newResolution->expirationDate_unix = $newResolution->expirationDate->getTimestamp();
@@ -181,7 +181,7 @@ function assembleResolution($planToResolve,$position,$peopleToContact){
         }
     }
     array_push($currentResolutions,$newResolution);
-    if(file_put_contents('/var/www/resolutions.json',json_encode($currentResolutions))){
+    if(file_put_contents('../../resolutions.json',json_encode($currentResolutions))){
         return $newResolution;
     }
 
