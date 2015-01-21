@@ -11,7 +11,7 @@ schedulingApp.controller('ErrorController',function($scope,$http){
     };
 })
 
-schedulingApp.controller('myRequestsCtrl',function($scope,$http){
+schedulingApp.controller('myRequestsCtrl',function($scope,$http,Auth){
     $scope.isAdmin = isAdmin;
     $scope.alertErrorVisible=false;
     $scope.alertVisible=false;
