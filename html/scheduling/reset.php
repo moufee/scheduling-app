@@ -1,6 +1,7 @@
 <?php
 require('oauth_config.php');
 require('email.php');
+require('mongo-connect.php');
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
@@ -15,7 +16,8 @@ if(isset($_GET['resolutionID'])&&$_GET['action']=='delete') {
     if(!in_array($currentUser->id,$authorisedAdminIDs)){
         echo'You are not permitted to delete requests.';
     }else {
-        $resolutions = json_decode(file_get_contents('../../resolutions.json'));
+        if($collection->remove(array('resolutionID'=>$_GET['resolutionID']))) echo true;
+        /*$resolutions = json_decode(file_get_contents('../../resolutions.json'));
         foreach ($resolutions as $index => $resolution) {
             if ($resolution->resolutionID == $_GET['resolutionID']) {
                 array_splice($resolutions, $index, 1);
@@ -23,7 +25,7 @@ if(isset($_GET['resolutionID'])&&$_GET['action']=='delete') {
                     echo true;
                 break;
             }
-        }
+        }*/
     }
 }
 
@@ -39,7 +41,8 @@ if(isset($_GET['resolutionID'])&&$_GET['action']=='cancel'){
                     echo true;
                     foreach($resolution->contacts as $person){
                         if($person->response==null)
-                        sendCancellationNotification('benferris2@gmail.com',$resolution->position,$resolution->weekendDate);
+                            //notifies people that haven't responded that they don't need to respond
+                        sendCancellationNotification('benferris2@gmail.com',$person->firstName,$resolution->position,$resolution->weekendDate);
                     }
                     break;
                 }
