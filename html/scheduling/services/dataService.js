@@ -4,7 +4,7 @@ angular.module('dataService',[])
 
         var authFactory = {};
         authFactory.isAdmin = function(){
-            $http.get('getdata.php',{params:{'requesting':'isAdmin'}})
+            return $http.get('getdata.php',{params:{'requesting':'isAdmin'}})
         }
 
     })
@@ -14,14 +14,15 @@ angular.module('dataService',[])
 
         resolutionsFactory.cancel = function(resolutionID){
             if(resolutionID) {
-                $http.get('reset.php', {'params': {'action': 'cancel', 'resolutionID': resolutionID}})
+                return $http.get('reset.php', {'params': {'action': 'cancel', 'resolutionID': resolutionID}})
             }
-        }
+        };
 
         resolutionsFactory.create = function(){
 
-        }
+        };
 
+        //noinspection ReservedWordAsName
         resolutionsFactory.delete = function(){
 
 
