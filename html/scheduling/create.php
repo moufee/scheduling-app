@@ -6,8 +6,8 @@
  * Time: 18:04
  */
 
-//error_reporting(E_ALL);
-//ini_set("display_errors", 1);
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 function error_handler($errno, $errstr, $errfile, $errline ) {
     sendPlainMessage('benferris2@gmail.com','Scheduling Error Report','Error Message: '.$errstr.'<br><br>On line '.$errline.'<br><br>In File '.$errfile);
     echo 'An error has occurred. The developer has been notified.';

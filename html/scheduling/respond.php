@@ -23,6 +23,7 @@ ini_set("display_errors", 1);
 require('email.php');
 require('Person.php');
 require('Resolution.php');
+require('checkresolutions.php');
 if(file_get_contents('../../resolutions.json')){
     $resolutions = json_decode(file_get_contents('../../resolutions.json'));
     if(isset($_GET['resolutionID'])&&isset($_GET['responderID'])&&isset($_GET['response'])){
