@@ -113,8 +113,12 @@ switch ($_GET['requesting']){
 
     case 'resolutions':
         if(in_array($user->id,$authorisedAdminIDs)) {
+            $resolutions = array();
         $cursor = $collection->find();
-            echo json_encode(iterator_to_array($cursor));
+            foreach($cursor as $id=>$value){
+                array_push($resolutions,$value);
+            }
+            echo json_encode($resolutions);
             //echo file_get_contents('../../resolutions.json');
         }
         else echo 'permissionError';
