@@ -2,8 +2,8 @@
 //error_reporting(E_ALL);
 //ini_set("display_errors", 1);
 require_once('Mandrill.php');
-
-
+$respond_url = "http://grace-scheduling-testing.herokuapp.com/respond.php";
+define('RESPOND_URL','http://grace-scheduling-testing.herokuapp.com/respond.php');
 function sendMessage($to,$subject,$name,$currentPosition,$currentWeekend,$neededPosition,$neededWeekend,$resolutionID,$personID,$expirationDate){
 
 try {
@@ -16,8 +16,6 @@ try {
         )
     );
     $message = array(
-//        'html' => '<p>Example HTML content</p>',
-//        'text' => 'Example text content',
         'subject' => $subject,
         'from_email' => 'productionScheduling@dev.floret.us',
         'from_name' => 'Production Scheduling',
@@ -75,11 +73,11 @@ try {
                     ),
                     array(
                         'name' => 'yeslink',
-                        'content' => 'http://dev.floret.us/scheduling/respond.php?response=yes&responderID='.$personID.'&resolutionID='.$resolutionID
+                        'content' => RESPOND_URL.'?response=yes&responderID='.$personID.'&resolutionID='.$resolutionID
                     ),
                     array(
                         'name' => 'nolink',
-                        'content' => 'http://dev.floret.us/scheduling/respond.php?response=no&responderID='.$personID.'&resolutionID='.$resolutionID
+                        'content' => RESPOND_URL.'?response=no&responderID='.$personID.'&resolutionID='.$resolutionID
                     ),
                     array(
                         'name' => 'expirationdate',
@@ -359,11 +357,11 @@ function sendRequestEmailMultipleWeekends($to,$subject,$name,$scheduledWeekends,
                         ),
                         array(
                             'name' => 'yeslink',
-                            'content' => 'http://dev.floret.us/scheduling/respond.php?response=yes&responderID='.$personID.'&resolutionID='.$resolutionID
+                            'content' => RESPOND_URL.'?response=yes&responderID='.$personID.'&resolutionID='.$resolutionID
                         ),
                         array(
                             'name' => 'nolink',
-                            'content' => 'http://dev.floret.us/scheduling/respond.php?response=no&responderID='.$personID.'&resolutionID='.$resolutionID
+                            'content' => RESPOND_URL.'?response=no&responderID='.$personID.'&resolutionID='.$resolutionID
                         )
                     )
                 )

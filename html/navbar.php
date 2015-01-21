@@ -10,9 +10,7 @@
           </div>
         <div class="navbar-collapse collapse">
         <ul class="navbar-nav nav">
-        <li><a href="http://dev.floret.us/brainscape2">Brainscape</a> </li>
-        <li><a href="http://dev.floret.us/dropbox.php">Dropbox</a></li>
-        <li><a href="http://dev.floret.us/scheduling/">Scheduling</a> </li>
+        <li><a href="scheduling">Scheduling</a> </li>
         <!--<li><a href="http://moufee.com/music">Music</a>
         <li><a href="http://moufee.com/upload">Upload</a></li>
         <li><a href="http://moufee.com/contact">Support</a></li>
