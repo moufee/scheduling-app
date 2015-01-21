@@ -16,7 +16,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http,Auth){
     $scope.alertErrorVisible=false;
     $scope.alertVisible=false;
 
-    Auth.isAdmin.success(function(data){
+    Auth.isAdmin().success(function(data){
         $scope.isAdmin = data ? true : false;
     });
 
