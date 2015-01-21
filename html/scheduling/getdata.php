@@ -2,6 +2,7 @@
 header('Content-Type: application/json');
 require_once("oauth_config.php");
 require_once('email.php');
+require('mongo-connect.php');
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
@@ -93,7 +94,13 @@ switch ($_GET['requesting']){
         break;
     case'myRequests':
         $myRequests = array();
-        $resolutions = json_decode(file_get_contents('../../resolutions.json'));
+        //$resolutions = json_decode(file_get_contents('../../resolutions.json'));
+        $resolutions = array();
+        $cursor = $collection->find();
+            foreach ( $cursor as $id => $value )
+            {
+                array_push($resolutions,$value);
+            }
         foreach($resolutions as $resolution){
         if($resolution->requester->planningCenterID==$user->id){
             array_push($myRequests,$resolution);
