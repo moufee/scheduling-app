@@ -98,9 +98,8 @@ switch ($_GET['requesting']){
         $resolutions = array();
         $query = array('requester'=>array('planningCenterID'=>$user->id));
         $cursor = $collection->find($query);
-            foreach ( $cursor as $id => $value )
-            {
-                array_push($myRequests,$value);
+            while($cursor->hasNext()){
+                array_push($myRequests,$cursor->getNext());
             }
         /*foreach($resolutions as $resolution){
             if($resolution->requester->planningCenterID==$user->id){
