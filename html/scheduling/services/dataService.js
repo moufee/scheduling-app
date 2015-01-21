@@ -4,7 +4,7 @@ angular.module('dataService',[])
 
         var authFactory = {};
         authFactory.isAdmin = function(){
-            $http.get('getdata.php',{params:{'requesting':'isAdmin'}})
+            return $http.get('getdata.php',{params:{'requesting':'isAdmin'}})
         };
         return authFactory;
     })
