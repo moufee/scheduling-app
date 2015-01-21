@@ -1,4 +1,4 @@
-var schedulingApp = angular.module('schedulingApp', ['ngRoute','appRoutes']);
+var schedulingApp = angular.module('schedulingApp', ['ngRoute','appRoutes','dataService']);
 var isAdmin = false;
 schedulingApp.controller('ErrorController',function($scope,$http){
     $scope.submitProblem = function(){
@@ -13,24 +13,11 @@ schedulingApp.controller('ErrorController',function($scope,$http){
 
 schedulingApp.controller('myRequestsCtrl',function($scope,$http){
     $scope.isAdmin = isAdmin;
-
     $scope.alertErrorVisible=false;
     $scope.alertVisible=false;
 
-    $http.get('getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
-
-        isAdmin = data;
-        $scope.isAdmin = isAdmin;
-
-
-    });
-
-    $http.get('getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
-
-
+    Auth.isAdmin.success(function(data){
         $scope.isAdmin = data ? true : false;
-
-
     });
 
     $http.get('getdata.php',{'params':{'requesting':'myRequests'}}).success(function(data){
