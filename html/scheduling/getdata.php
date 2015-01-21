@@ -96,7 +96,7 @@ switch ($_GET['requesting']){
         $myRequests = array();
         //$resolutions = json_decode(file_get_contents('../../resolutions.json'));
         $resolutions = array();
-        $query = array('requester'=>array('planningCenterID'=>$user->id));
+        $query = array('requester.planningCenterID'=>$user->id);
         $cursor = $collection->find($query);
             while($cursor->hasNext()){
                 array_push($myRequests,$cursor->getNext());
