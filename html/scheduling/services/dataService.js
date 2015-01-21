@@ -4,9 +4,9 @@ angular.module('dataService',[])
 
         var authFactory = {};
         authFactory.isAdmin = function(){
-            return $http.get('getdata.php',{params:{'requesting':'isAdmin'}})
+            $http.get('getdata.php',{params:{'requesting':'isAdmin'}})
         }
-
+        return authFactory;
     })
 
     .factory('Resolutions',function($http){
@@ -25,6 +25,6 @@ angular.module('dataService',[])
         //noinspection ReservedWordAsName
         resolutionsFactory.delete = function(){
 
-
+            return resolutionsFactory;
         }
     });
