@@ -184,9 +184,7 @@ function assembleResolution($planToResolve,$position,$peopleToContact){
     }
     array_push($currentResolutions,$newResolution);
     if($collection->insert($newResolution)) return true;
-    /*if(file_put_contents('../../resolutions.json',json_encode($currentResolutions))){
-        return $newResolution;
-    }*/
+    file_put_contents('../../resolutions.json',json_encode($currentResolutions));
 
 }
 
