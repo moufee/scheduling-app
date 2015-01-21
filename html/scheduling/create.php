@@ -17,6 +17,7 @@ function error_handler($errno, $errstr, $errfile, $errline ) {
 set_error_handler("error_handler");
 
 include('email.php');
+require('mongo-connect.php');
 
 define('CONSUMER_KEY', 'ZtQ5fkQrfsKqgq7NJxCI');
 define('CONSUMER_SECRET', 'Ga70aAu2iiolkqynBBcum5KPeHkOYtu3PgRAcriD');
@@ -159,6 +160,7 @@ function calculateExpirationDate($planToResolve){
 //creates the resolution object and stores it in a json file
 function assembleResolution($planToResolve,$position,$peopleToContact){
     global $request;
+    global $collection;
 
     $time = strtotime($planToResolve->sort_date)-3600;
     //$dateArray = date_parse($plan->sort_date);
@@ -181,9 +183,10 @@ function assembleResolution($planToResolve,$position,$peopleToContact){
         }
     }
     array_push($currentResolutions,$newResolution);
-    if(file_put_contents('../../resolutions.json',json_encode($currentResolutions))){
+    if($collection->insert($newResolution)) return true;
+    /*if(file_put_contents('../../resolutions.json',json_encode($currentResolutions))){
         return $newResolution;
-    }
+    }*/
 
 }
 
