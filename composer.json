@@ -1,6 +1,7 @@
 {
   "require": {
     "ext-oauth": "*",
-    "ext-mongo": "*"
+    "ext-mongo": "*",
+    "ext-newrelic": "*"
   }
 }
