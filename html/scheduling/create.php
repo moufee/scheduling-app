@@ -22,8 +22,8 @@ define('CONSUMER_KEY', 'ZtQ5fkQrfsKqgq7NJxCI');
 define('CONSUMER_SECRET', 'Ga70aAu2iiolkqynBBcum5KPeHkOYtu3PgRAcriD');
 
 // Obtain these keys at http://accesstoken.io
-define('ACCESS_TOKEN_KEY', '8vOujRH7nFfta7g0mlfO');
-define('ACCESS_TOKEN_SECRET', 'VUO59Hpv2dm7XZA9Fp425G15ydnDeEoHSB3OuZdC');
+define('ACCESS_TOKEN_KEY', 'I9MsYDyPFhjpcd3NvmJD');
+define('ACCESS_TOKEN_SECRET', 'QNQQ7MF2iNpJUayzR7aOpQcXc8xKaaLCLysTk93k');
 
 $oauth = new OAuth(CONSUMER_KEY, CONSUMER_SECRET);
 $oauth->setToken(ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET);
