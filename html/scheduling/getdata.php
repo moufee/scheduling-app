@@ -99,7 +99,7 @@ switch ($_GET['requesting']){
         $cursor = $collection->find();
             foreach ( $cursor as $id => $value )
             {
-                array_push($resolutions,$value);
+                array_push($resolutions,(object)$value);
             }
         foreach($resolutions as $resolution){
         if($resolution->requester->planningCenterID==$user->id){
