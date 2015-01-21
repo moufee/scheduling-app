@@ -1,21 +1,5 @@
 var schedulingApp = angular.module('schedulingApp', ['ngRoute','appRoutes']);
 var isAdmin = false;
-schedulingApp.config(function($routeProvider,$locationProvider){
-    $routeProvider.when('/',{
-        controller:"homeCtrl",
-        templateUrl:"views/home2.html"
-    }).when('/myrequests',{
-        controller:"myRequestsCtrl",
-        templateUrl:"views/myrequests.html"
-    }).when('/admin',{
-        controller:"adminCtrl",
-        templateUrl:"views/admin.html"
-    })
-        .otherwise({redirectTo:'/'})
-});
-
-
-
 schedulingApp.controller('ErrorController',function($scope,$http){
     $scope.submitProblem = function(){
         $scope.alertErrorVisible=false;
