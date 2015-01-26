@@ -62,7 +62,8 @@ if($resolution){
         }
     }
 
-}
+}else
+    echo '<div class = "alert alert-danger"><h1>Resolution Not Found</h1><h2>The resolution has likely been deleted from the system.</h2></div>';
 /*if(file_get_contents('../../resolutions.json')){
     $resolutions = json_decode(file_get_contents('../../resolutions.json'));
     if(isset($_GET['resolutionID'])&&isset($_GET['responderID'])&&isset($_GET['response'])){
