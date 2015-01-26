@@ -31,7 +31,7 @@ $query = array('resolutionID'=>$_GET['resolutionID']);
 $resolution = $collection->findOne($query);
 if($resolution){
     if($resolution['isResolved']){
-        if($resolution['responderID']==$_GET['responderID'])
+        if($resolution['resolver']['planningCenterID']==$_GET['responderID'])
             echo '<h1 class="alert alert-warning">You have already responded "yes" to this request.</h1>';
         else
             echo '<h1 class="alert alert-warning">This position has already been filled.</h1>';
