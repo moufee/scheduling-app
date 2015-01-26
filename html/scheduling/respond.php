@@ -46,13 +46,13 @@ if($resolution){
         foreach($resolution['contacts'] as $index => $contact){
             if($contact['planningCenterID']==$_GET['responderID']){
                 if($_GET['response']=='yes'){
-                    if($collection->update($query,array('$set' =>array('isResolved'=>true,'contacts.'.$index =>array('response'=>'yes'),'resolver'=>$contact)))) {
+                    if($collection->update($query,array('$set' =>array('isResolved'=>true,'contacts.'.$index.'.response' =>'yes','resolver'=>$contact)))) {
                         echo '<div class="alert alert-success"><h1>Your response has been received.</h1>
                                 <h3>A scheduler has been notified to make the required changes.</h3></div>';
                         //todo: send emails
                     }
                 }elseif($_GET['response']=='no'){
-                    if($collection->update($query,array('$set'=>array('contacts.'.$index =>array('response'=>'no'))))){
+                    if($collection->update($query,array('$set'=>array('contacts.'.$index.'.response' =>'no')))){
                         echo '<div class="alert alert-success"><h1>Your response has been received.</h1>
                                       <h3>You may change your response at any time by clicking the "yes" link in the email you received.</h3></div>';
                         //todo: email if all responded no
