@@ -23,7 +23,6 @@ ini_set("display_errors", 1);
 require_once('email.php');
 require('Person.php');
 require('Resolution.php');
-require('checkresolutions.php');
 require('mongo-connect.php');
 
 $resolutions = [];

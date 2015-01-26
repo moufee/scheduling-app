@@ -13,6 +13,7 @@ $cursor = $collection->find($query);
 while($cursor->hasNext()){
     array_push($resolutions,$cursor->getNext());
 }
+echo count($resolutions);
 if(count($resolutions)>0){
     $collection->update($query,array('$set'=>array('isExpired'=>true)));
     foreach($resolutions as $index=>$resolution){
