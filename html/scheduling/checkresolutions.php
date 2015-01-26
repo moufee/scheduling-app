@@ -14,7 +14,7 @@ while($cursor->hasNext()){
     array_push($resolutions,$cursor->getNext());
 }
 if(count($resolutions)>0){
-    $collection->update($query,array('isExpired'=>array('$set'=>true)));
+    $collection->update($query,array('$set'=>array('isExpired'=>true)));
     foreach($resolutions as $index=>$resolution){
         sendPlainMessage('benferris2@gmail.com'/*$resolution->requester->email*/, 'Scheduling request has expired.', '<p style="font-size:16px;font-family:Arial;">'.$resolution['requester']['firstName'].',</p><p style="font-size:16px; font-family:Arial;">Your request to find a replacement for ' . $resolution['weekendDate'] . ' has expired. Please contact Kris Rinas as krisr@gracechurchin.org and he will work with you to find a trade.</p>');
         sendPlainMessage('benferris2@gmail.com'/*kris*/, 'Scheduling request has expired.', '<p style="font-size:16px; font-family:Arial;">'.$resolution['requester']['name'].'\'s request to find a replacement for ' . $resolution['weekendDate'] . ' has expired. '.$resolution['requester']['firstName'].' has been instructed to contact you.</p>');
