@@ -46,6 +46,7 @@ if($resolution){
         foreach($resolution['contacts'] as $index => $contact){
             if($contact['planningCenterID']==$_GET['responderID']){
                 if($_GET['response']=='yes'){
+                    $contact['response'] = 'yes';
                     if($collection->update($query,array('$set' =>array('isResolved'=>true,'contacts.'.$index.'.response' =>'yes','resolver'=>$contact)))) {
                         echo '<div class="alert alert-success"><h1>Your response has been received.</h1>
                                 <h3>A scheduler has been notified to make the required changes.</h3></div>';
