@@ -24,7 +24,46 @@ require('email.php');
 require('Person.php');
 require('Resolution.php');
 require('checkresolutions.php');
-if(file_get_contents('../../resolutions.json')){
+require('mongo-connect.php');
+
+$resolutions = [];
+$query = array('resolutionID'=>$_GET['resolutionID']);
+$resolution = $collection->findOne($query);
+if($resolution){
+    if($resolution['isResolved']){
+        if($resolution['responderID']==$_GET['responderID'])
+            echo '<h1 class="alert alert-warning">You have already responded "yes" to this request.</h1>';
+        else
+            echo '<h1 class="alert alert-warning">This position has already been filled.</h1>';
+    }
+    elseif($resolution['isExpired']) {
+        echo '<h1 class="alert alert-danger">This request has expired.</h1>';
+    }
+    elseif($resolution['isCancelled']){
+        echo '<h1 class="alert alert-danger">This request has been cancelled.</h1>';
+    }
+    else{
+        foreach($resolution['contacts'] as $index => $contact){
+            if($contact['planningCenterID']==$_GET['responderID']){
+                if($_GET['response']=='yes'){
+                    if($collection->update($query,array('$set' =>array('isResolved'=>true,'people.'.$index =>array('response'=>'yes'),'resolver'=>$contact)))) {
+                        echo '<div class="alert alert-success"><h1>Your response has been received.</h1>
+                                <h3>A scheduler has been notified to make the required changes.</h3></div>';
+                        //todo: send emails
+                    }
+                }elseif($_GET['response']=='no'){
+                    if($collection->update($query,array('$set'=>array('people.'.$index =>array('response'=>'no'))))){
+                        echo '<div class="alert alert-success"><h1>Your response has been received.</h1>
+                                      <h3>You may change your response at any time by clicking the "yes" link in the email you received.</h3></div>';
+                        //todo: email if all responded no
+                    }
+                }
+            }
+        }
+    }
+
+}
+/*if(file_get_contents('../../resolutions.json')){
     $resolutions = json_decode(file_get_contents('../../resolutions.json'));
     if(isset($_GET['resolutionID'])&&isset($_GET['responderID'])&&isset($_GET['response'])){
         $isFound = false;
@@ -61,7 +100,8 @@ if(file_get_contents('../../resolutions.json')){
                                 //should send to Kris or scheduler?
                                 sendSchedulingInstructions('benferris2@gmail.com',$selectedResolution->requester->name,$selectedResolution->position,$selectedResolution->resolver->currentlyScheduledWeekend,$selectedResolution->resolver->name,$selectedResolution->position,$selectedResolution->weekendDate);
                                 //sendResolutionNotification('krisr@gracechurchin.org',$selectedResolution->requester->name,$selectedResolution->position,$selectedResolution->resolver->currentlyScheduledWeekend,$selectedResolution->resolver->name,$selectedResolution->position,$selectedResolution->weekendDate);
-                                sendPlainMessage('benferris2@gmail.com'/*$selectedResolution->requester->email*/,'Your request has been resolved','<p style="font-size:16px;font-family:Arial;">'.$selectedResolution->requester->firstName.',</p><p style="font-size:16px;">Your request to find a replacement for your scheduled weekend, '.$selectedResolution->weekendDate.', has been successfully resolved. You will be scheduled on <strong>'.$selectedResolution->resolver->currentlyScheduledWeekend.'</strong> instead of '.$selectedResolution->weekendDate.'. A scheduler has been notified to make these changes.</p>');
+                                //goes to selectedResolution->requester->email
+                                sendPlainMessage('benferris2@gmail.com','Your request has been resolved','<p style="font-size:16px;font-family:Arial;">'.$selectedResolution->requester->firstName.',</p><p style="font-size:16px;">Your request to find a replacement for your scheduled weekend, '.$selectedResolution->weekendDate.', has been successfully resolved. You will be scheduled on <strong>'.$selectedResolution->resolver->currentlyScheduledWeekend.'</strong> instead of '.$selectedResolution->weekendDate.'. A scheduler has been notified to make these changes.</p>');
                                 //should send to $selectedResolution->resolver->email, notifies resolver of when their new weekend is
                                 sendPlainMessage('benferris2@gmail.com','Response Received','<p style="font-size:16px;font-family:Arial;">'.$selectedResolution->resolver->firstName.',</p><p style="font-size:16px;font-family:Arial;">Your response has been received and you will now be scheduled on <strong>'.$selectedResolution->weekendDate.'</strong> instead of '.$selectedResolution->resolver->currentlyScheduledWeekend.'. A scheduler has been notified to make these changes.');
                                 //send notification to contacted people
@@ -102,7 +142,7 @@ if(file_get_contents('../../resolutions.json')){
 }
 else{
     echo 'error, unable to open file';
-}
+}*/
 ?>
 </div>
 </body>
