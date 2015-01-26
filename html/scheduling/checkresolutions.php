@@ -4,7 +4,7 @@ ini_set("display_errors", 1);
 //allow for email sending and database access
 require_once('email.php');
 require_once('mongo-connect.php');
-$resolutions = [];
+$resolutions = array();
 $currentDate = new DateTime();
 $currentTime = $currentDate->getTimestamp();
 //find resolutions that are not resolved, canceled, or have already been marked as expired, but have passed their expiration date
