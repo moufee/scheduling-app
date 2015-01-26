@@ -20,7 +20,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
-require('email.php');
+require_once('email.php');
 require('Person.php');
 require('Resolution.php');
 require('checkresolutions.php');
