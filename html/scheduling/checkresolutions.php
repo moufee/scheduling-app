@@ -7,6 +7,7 @@ require_once('mongo-connect.php');
 $resolutions = array();
 $currentDate = new DateTime();
 $currentTime = $currentDate->getTimestamp();
+echo $currentTime;
 //find resolutions that are not resolved, canceled, or have already been marked as expired, but have passed their expiration date
 $query = array('ixExpired'=>false,'isResolved'=>false,'isCancelled'=>false,'expirationDate_unix'=>array('$lte'=>$currentTime));
 $cursor = $collection->find($query);
