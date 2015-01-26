@@ -2,8 +2,8 @@
 //error_reporting(E_ALL);
 //ini_set("display_errors", 1);
 require_once('Mandrill.php');
-$respond_url = "http://grace-scheduling-testing.herokuapp.com/respond.php";
-define('RESPOND_URL','http://grace-scheduling-testing.herokuapp.com/respond.php');
+$respond_url = "http://grace-scheduling-testing.herokuapp.com/scheduling/respond.php";
+define('RESPOND_URL','http://grace-scheduling-testing.herokuapp.com/scheduling/respond.php');
 function sendMessage($to,$subject,$name,$currentPosition,$currentWeekend,$neededPosition,$neededWeekend,$resolutionID,$personID,$expirationDate){
 
 try {
