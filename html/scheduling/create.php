@@ -169,21 +169,22 @@ function assembleResolution($planToResolve,$position,$peopleToContact){
 
     //create the requester person object
     $requester = new Person($request->userID,$planToResolve->dates,$position);
-    //check for duplicates and add new resolution to currently stored resolutions
-    $currentResolutions = json_decode(file_get_contents('../../resolutions.json'));
+    //todo: check for duplicates and add new resolution to currently stored resolutions
     $newResolution = new Resolution($date,$planToResolve->dates,$request->planID,$position,$requester,$peopleToContact,$time);
     $newResolution->expirationDate = calculateExpirationDate($planToResolve);
     $newResolution->expirationDate_unix = $newResolution->expirationDate->getTimestamp();
-    foreach($currentResolutions as $resolution){
+    /*foreach($currentResolutions as $resolution){
         if($resolution->requester->planningCenterID==$newResolution->requester->planningCenterID&&$resolution->planID==$newResolution->planID&&$newResolution->position==$resolution->position&&$resolution->isCancelled==false){
 
             echo"You have already made a request for the selected weekend.";
             die();
         }
+    }*/
+    if($collection->insert($newResolution)) {
+        return $newResolution;
+    }else{
+        return false;
     }
-    array_push($currentResolutions,$newResolution);
-    if($collection->insert($newResolution)) return $newResolution;
-    //file_put_contents('../../resolutions.json',json_encode($currentResolutions));
 
 }
 
