@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Response Page</title>
+    <title>Respond</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <style>
         body{
@@ -62,8 +62,9 @@ if($resolution){
         }
     }
 
-}else
-    echo '<div class = "alert alert-danger"><h1>Resolution Not Found</h1><h2>The resolution has likely been deleted from the system.</h2></div>';
+}else {
+    echo '<div class = "alert alert-danger"><h1>Request Not Found</h1><h2>The request has likely been deleted from the system.</h2></div>';
+}
 /*if(file_get_contents('../../resolutions.json')){
     $resolutions = json_decode(file_get_contents('../../resolutions.json'));
     if(isset($_GET['resolutionID'])&&isset($_GET['responderID'])&&isset($_GET['response'])){
