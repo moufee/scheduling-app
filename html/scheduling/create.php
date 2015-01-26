@@ -175,7 +175,7 @@ function assembleResolution($planToResolve,$position,$peopleToContact){
     foreach($cursor as $id=>$value){
         array_push($currentResolutions,$value);
     }
-    $currentResolutions = json_decode(json_decode($currentResolutions));
+    $currentResolutions = json_decode(json_encode($currentResolutions));
     //$currentResolutions = json_decode(file_get_contents('../../resolutions.json'));
     $newResolution = new Resolution($date,$planToResolve->dates,$request->planID,$position,$requester,$peopleToContact,$time);
     $newResolution->expirationDate = calculateExpirationDate($planToResolve);
