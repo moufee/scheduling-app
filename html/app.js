@@ -140,7 +140,7 @@ schedulingApp.controller('homeCtrl',function($scope, $http, Auth, Resolutions, P
     });
 
 
-    PCO.me.success(function(data){
+    PCO.me().success(function(data){
         user = data;
         $scope.organization = user.organization;
         //todo: revise to make cleaner and automatically select the service type for which the logged-in user is scheduled
