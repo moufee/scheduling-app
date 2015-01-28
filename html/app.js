@@ -164,7 +164,7 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
     }
 }*/
 
-        if(user.name==null) window.location = 'http://grace-scheduling-testing.herokuapp.com/scheduling';
+        if(user.name==null) window.location = 'http://grace-scheduling-testing.herokuapp.com/';
         $scope.status = "Hello "+user.first_name;
         console.log(data);
         console.log("User has "+data.contact_data.email_addresses.length+" email addresses.");
@@ -181,7 +181,7 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
             $scope.submitVisible = true;
         });
     }).error(function(){
-        window.location = 'http://grace-scheduling-testing.herokuapp.com/scheduling';
+        window.location = 'http://grace-scheduling-testing.herokuapp.com/';
     });
 
 
