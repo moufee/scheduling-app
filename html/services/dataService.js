@@ -20,9 +20,8 @@ angular.module('dataService',[])
         resolutionsFactory.create = function(serviceTypeID,checkedPlans,selectedPlanID,userID,name,email){
             return $http.post('create.php', {'action': 'createResolution','serviceTypeID':serviceTypeID, 'checkedPlans': checkedPlans, 'planID': selectedPlanID, 'userID': userID, 'name': name, 'email': email})
         };
-        //noinspection ReservedWordAsName
         resolutionsFactory.delete = function(id){
-            $http.get('reset.php', {'params': {'resolutionID': id, 'action': 'delete'}})
+            return $http.get('reset.php', {'params': {'resolutionID': id, 'action': 'delete'}})
         };
         resolutionsFactory.mine = function(){
             return $http.get('getdata.php',{'params':{'requesting':'myRequests'}});
