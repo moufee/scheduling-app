@@ -3,15 +3,15 @@ var isAdmin = false;
 schedulingApp.controller('ErrorController',function($scope,$http){
     $scope.submitProblem = function(){
         $scope.alertErrorVisible=false;
-        $http.get('email.php',{params:{'action':'sendError','message':$scope.problemText}}).success(function(data){
+        $http.get('email.php',{params:{'action':'sendError','message':$scope.problemText}}).success(function(){
             //success notification
             alert('Feedback Sent');
         });
         $scope.problemText = "";
     };
-})
+});
 
-schedulingApp.controller('myRequestsCtrl',function($scope,$http,Auth){
+schedulingApp.controller('myRequestsCtrl',function($scope, $http, Auth, Resolutions){
     $scope.isAdmin = isAdmin;
     $scope.alertErrorVisible=false;
     $scope.alertVisible=false;
@@ -20,7 +20,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http,Auth){
         $scope.isAdmin = data ? true : false;
     });
 
-    $http.get('getdata.php',{'params':{'requesting':'myRequests'}}).success(function(data){
+    Resolutions.mine().success(function(data){
         console.log(data);
         $scope.resolutions=data.reverse();
 
@@ -32,7 +32,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http,Auth){
             $scope.alertErrorText = '';
 
             //cancel resolution
-            $http.get('reset.php',{'params':{'action':'cancel','resolutionID':id}}).success(function(data){
+            Resolutions.cancel(id).success(function(data){
                 console.log(data);
                 if(data==true) {
                     location.reload();
@@ -56,29 +56,24 @@ schedulingApp.controller('myRequestsCtrl',function($scope,$http,Auth){
 
 });
 
-schedulingApp.controller('adminCtrl', function ($scope,$http) {
+schedulingApp.controller('adminCtrl', function ($scope, $http, Auth, Resolutions) {
     $scope.alertErrorVisible=false;
     $scope.status ='';
-    $http.get('getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
-
-
+    Auth.isAdmin().success(function(data){
         $scope.isAdmin = data ? true : false;
-
-
     });
 
-    $http.get('getdata.php',{'params':{'requesting':'resolutions'}}).success(function (data) {
+    Resolutions.all().success(function (data) {
             console.log(data);
             $scope.resolutions = data.reverse();
             if(data=='permissionError'){
-                $scope.alertErrorText="You are not permitted to view this page."
+                $scope.alertErrorText="You are not permitted to view this page.";
                 $scope.alertErrorVisible=true;
             }
         });
 
     $scope.refresh = function(){
         location.reload();
-
     };
 
     $scope.cancelResolution = function(id){
@@ -87,7 +82,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
             $scope.alertErrorText = '';
 
             //cancel resolution
-            $http.get('reset.php',{'params':{'action':'cancel','resolutionID':id}}).success(function(data){
+            Resolutions.cancel(id).success(function(data){
                 console.log(data);
                 if(data==true) {
                     location.reload();
@@ -102,14 +97,14 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
         }
 
 
-    }
+    };
 
 
 
     $scope.deleteResolution = function (id) {
         $scope.alertErrorVisible=false;
         if(confirm("Are you sure you want to delete this request?")) {
-            $http.get('reset.php', {'params': {'resolutionID': id, 'action': 'delete'}}).success(function (data) {
+            Resolutions.delete(id).success(function (data) {
                 if (data == true)
                     location.reload();
                 else {
@@ -119,7 +114,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
 
             })
         }
-    }
+    };
 
     $scope.resolutionFilter = function(value){
 
@@ -129,7 +124,7 @@ schedulingApp.controller('adminCtrl', function ($scope,$http) {
 
 });
 
-schedulingApp.controller('homeCtrl',function($scope, $http){
+schedulingApp.controller('homeCtrl',function($scope, $http, Auth, Resolutions, PCO){
     $scope.isAdmin = isAdmin;
     var user;
     var emailAddresses;
@@ -138,42 +133,29 @@ schedulingApp.controller('homeCtrl',function($scope, $http){
     $scope.status2Visible = false;
     $scope.status = "Loading...";
     $scope.resolveBtnText = "Submit";
-    $http.get('getdata.php',{params:{'requesting':'isAdmin'}}).success(function(data){
 
-        isAdmin = data;
+    Auth.isAdmin().success(function(data){
+        isAdmin = data ? true : false;
         $scope.isAdmin = isAdmin;
+    });
 
 
-        });
-
-
-    $http.get('getdata.php',{params:{'requesting':'me'}}).success(function(data){
+    PCO.me.success(function(data){
         user = data;
         $scope.organization = user.organization;
-
         //todo: revise to make cleaner and automatically select the service type for which the logged-in user is scheduled
 
-        /*for(var i =0;i<user.organization.service_type_folders.length;i++){
-            if(user.organization.service_type_folders[i].name=="Weekend Worship"){
-                $scope.selectedFolder = user.organization.service_type_folders[i];
-            }
-        }*/
-/*for(i = 0;i<$scope.selectedFolder.service_types.length;i++){
-    if($scope.selectedFolder.service_types[i].name=="Grace 146th"){
-$scope.selectedServiceType = $scope.selectedFolder.service_types[i];
-    }
-}*/
 
         if(user.name==null) window.location = 'http://grace-scheduling-testing.herokuapp.com/';
         $scope.status = "Hello "+user.first_name;
-        console.log(data);
+        /*console.log(data);
         console.log("User has "+data.contact_data.email_addresses.length+" email addresses.");
         emailAddresses = data.contact_data.email_addresses;
-        for(i=0;i<emailAddresses.length;i++){
+        for(var i=0;i<emailAddresses.length;i++){
             console.log(emailAddresses[i].address);
-        }
+        }*/
 
-        $http.get('getdata.php',{params:{'requesting':'plans','serviceTypeID':42921}}).success(function(data){
+        PCO.plans(42921).success(function(data){
             $scope.prompt = "Select a weekend on which you are unable to serve:";
             $scope.selectVisible = true;
             $scope.plans = data;
@@ -196,20 +178,17 @@ $scope.selectedServiceType = $scope.selectedFolder.service_types[i];
         $scope.alertVisible=true;
     };
 
-    $scope.selectWeekend = function(position){
+    $scope.selectWeekend = function(){
         $scope.scheduledWeekends = null;
         $scope.checkedWeekendsVisible = true;
         $scope.statusMessage2 = "Loading Alternate Weekends...";
         $scope.status2Visible = true;
-$http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':42921,'selectedWeekendID':$scope.selectedWeekendID,'userID':user.id}}).success(function(data){
-    $scope.status2Visible = false;
-    console.log(data);
-    $scope.scheduledWeekends = data;
-})
-
-    }
-
-
+        PCO.scheduledPlans(42921,$scope.selectedWeekendID,user.id).success(function(data){
+            $scope.status2Visible = false;
+            console.log(data);
+            $scope.scheduledWeekends = data;
+        })
+    };
     $scope.submitResolution = function() {
         $scope.alertVisible=false;
         var checkedWeekends = [];
@@ -221,14 +200,13 @@ $http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':4
 
         var isDuplicate = false;
         //checks for duplicate
-        $http.get('getdata.php',{'params':{'requesting':'myRequests'}}).success(function (data) {
+        Resolutions.mine().success(function (data) {
             var resolutions = data;
             for (var i = 0; i < resolutions.length; i++) {
                 if (resolutions[i].requester.planningCenterID == user.id && resolutions[i].planID == $scope.selectedWeekendID&&resolutions[i].isCancelled==false) {
                     isDuplicate = true;
                 }
             }
-
             if (isDuplicate) {
                 $scope.alertErrorText = "You have already made a request for this weekend.";
                 $scope.alertErrorVisible = true;
@@ -246,7 +224,7 @@ $http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':4
                 $scope.alertErrorVisible = false;
                 $scope.resolveBtnText = "Please Wait...";
                 $scope.submitDisabled = true;
-                $http.post('create.php', {'action': 'createResolution','serviceTypeID':42921, 'checkedPlans': checkedWeekends, 'planID': $scope.selectedWeekendID, 'userID': user.id, 'name': user.name, 'email': emailAddresses[0].address}).success(function (data) {
+                Resolutions.create(42921,checkedWeekends,$scope.selectedWeekendID,user.id,user.name,emailAddresses[0].address).success(function (data) {
                     if (data == true) {
                         $scope.resolveBtnText = "Submit";
                         $scope.submitDisabled = false;
