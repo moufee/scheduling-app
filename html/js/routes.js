@@ -13,7 +13,6 @@ angular.module('appRoutes', ['ngRoute'])
             controller:"adminCtrl",
             templateUrl:"views/admin.html"
         })
-            .otherwise({redirectTo:'/'})
-        $locationProvider.html5Mode(true);
+            .otherwise({redirectTo:'/'});
     });
 
