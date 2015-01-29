@@ -35,7 +35,7 @@ angular.module('dataService',['ngCookies'])
     .factory('PCO',function($http,$cookies){
         var PCOFactory = {};
         PCOFactory.me = function(){
-            return $http.get('http://scheduling-node.herokuapp.com/me',{'params':{'oauth_token':$cookies.oauth_token,'oauth_token_secret':$cookies.oauth_token_secret}});
+            return $http.get('getdata.php',{'params':{'requesting':'me'}});
         };
         PCOFactory.scheduledPlans = function(serviceTypeID,selectedWeekendID,userID){
             return $http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':serviceTypeID,'selectedWeekendID':selectedWeekendID,'userID':userID}});
