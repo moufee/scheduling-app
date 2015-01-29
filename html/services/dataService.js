@@ -35,7 +35,7 @@ angular.module('dataService',[])
     .factory('PCO',function($http){
         var PCOFactory = {};
         PCOFactory.me = function(){
-            return $http.get('getdata.php',{params:{'requesting':'me'}});
+            return $http.get('http://scheduling-node.herokuapp.com/me');
         };
         PCOFactory.scheduledPlans = function(serviceTypeID,selectedWeekendID,userID){
             return $http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':serviceTypeID,'selectedWeekendID':selectedWeekendID,'userID':userID}});
