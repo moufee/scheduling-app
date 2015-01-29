@@ -148,10 +148,10 @@ schedulingApp.controller('homeCtrl',function($scope, $http, Auth, Resolutions, P
 
         if(user.name==null) window.location = 'http://grace-scheduling-testing.herokuapp.com/';
         $scope.status = "Hello "+user.first_name;
-        /*console.log(data);
-        console.log("User has "+data.contact_data.email_addresses.length+" email addresses.");
+        //console.log(data);
+        //console.log("User has "+data.contact_data.email_addresses.length+" email addresses.");
         emailAddresses = data.contact_data.email_addresses;
-        for(var i=0;i<emailAddresses.length;i++){
+        /*for(var i=0;i<emailAddresses.length;i++){
             console.log(emailAddresses[i].address);
         }*/
 
