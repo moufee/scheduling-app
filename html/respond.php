@@ -18,12 +18,13 @@
 <body>
 <div class="container">
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+//error_reporting(E_ALL);
+//ini_set("display_errors", 1);
+require_once('checkresolutions.php');
 require_once('email.php');
-require('Person.php');
-require('Resolution.php');
-require('mongo-connect.php');
+require_once('Person.php');
+require_once('Resolution.php');
+require_once('mongo-connect.php');
 
 $resolutions = [];
 $query = array('resolutionID'=>$_GET['resolutionID']);

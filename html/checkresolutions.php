@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
 //allow for email sending and database access
 require_once('email.php');
 require_once('mongo-connect.php');
