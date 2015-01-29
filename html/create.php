@@ -241,8 +241,6 @@ function sendCreationRequestEmails($newResolution){
         //send person an email (send to $personToContact->email)
         sendSchedulingRequest('benferris2@gmail.com', $personToContact->firstName, $personToContact->position, $personToContact->currentlyScheduledWeekend, $newResolution->position, $newResolution->weekendDate, $newResolution->resolutionID, $personToContact->planningCenterID,$newResolution->expirationDate->format('F jS').' at '.$newResolution->expirationDate->format('g:i A'));
     }
-    sendPlainMessage('benferris2@gmail.com','Merge Var Testing',json_encode($mergeVars));
-    sendPlainMessage('benferris2@gmail.com','To Array Testing',json_encode($to));
 }
 
 
