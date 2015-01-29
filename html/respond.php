@@ -51,12 +51,38 @@ if($resolution){
                         echo '<div class="alert alert-success"><h1>Your response has been received.</h1>
                                 <h3>A scheduler has been notified to make the required changes.</h3></div>';
                         //todo: send emails
+                        //should send to Kris or scheduler
+                        sendSchedulingInstructions('benferris2@gmail.com',$resolution['requester']['name'],$resolution['position'],$resolution['resolver']['currentlyScheduledWeekend'],$resolution['resolver']['name'],$resolution['position'],$resolution['weekendDate']);
+                        //sendResolutionNotification('krisr@gracechurchin.org',$resolution->requester->name,$resolution['position'],$resolution['resolver']['currentlyScheduledWeekend'],$resolution->resolver->name,$resolution['position'],$resolution['weekendDate']);
+                        //goes to selectedResolution->requester->email, notifies requester of his/her new weekend
+                        sendPlainMessage('benferris2@gmail.com','Your request has been resolved','<p style="font-size:16px;font-family:Arial;">'.$resolution['requester']['firstName'].',</p><p style="font-size:16px;">Your request to find a replacement for your scheduled weekend, '.$resolution['weekendDate'].', has been successfully resolved. You will be scheduled on <strong>'.$resolution['resolver']['currentlyScheduledWeekend'].'</strong> instead of '.$resolution['weekendDate'].'. A scheduler has been notified to make these changes.</p>');
+                        //should send to $resolution->resolver->email, notifies resolver of when their new weekend is
+                        sendPlainMessage('benferris2@gmail.com','Response Received','<p style="font-size:16px;font-family:Arial;">'.$resolution['resolver']['firstName'].',</p><p style="font-size:16px;font-family:Arial;">Your response has been received and you will now be scheduled on <strong>'.$resolution['weekendDate'].'</strong> instead of '.$resolution['resolver']['currentlyScheduledWeekend'].'. A scheduler has been notified to make these changes.');
+                        //send notification to contacted people that have not responded
+                        foreach($resolution['contacts'] as $contactInner) {
+                            if ($contactInner['planningCenterID'] != $resolution['resolver']['planningCenterID'] && $contactInner['response'] == null) //do not send to resolver or person that has responded
+                                //send to $contactInner->email
+                                sendPlainMessage('benferris2@gmail.com', 'Request Resolved', '<p style="font-size:16px;font-family:Arial;">' . $contact->firstName . ',</p><p style="font-size:16px;font-family:Arial;">The request you received to fill ' . $resolution['position'] . ' on ' . $resolution['weekendDate'] . ' has been resolved. You no longer need to respond.');
+                        }
                     }
                 }elseif($_GET['response']=='no'){
                     if($collection->update($query,array('$set'=>array('contacts.'.$index.'.response' =>'no')))){
                         echo '<div class="alert alert-success"><h1>Your response has been received.</h1>
                                       <h3>You may change your response at any time by clicking the "yes" link in the email you received.</h3></div>';
                         //todo: email if all responded no
+                        $resolution['contacts'][$index]['response'] = 'no';
+                        $numberOfPeople = count($resolution['contacts']);
+                        $numberRespondingNo=0;
+                        foreach($resolution['contacts'] as $index2=>$contactedPerson2){
+                            if($contactedPerson2['response']=='no'){
+                                $numberRespondingNo++;
+                            }
+                        }
+                        if($numberRespondingNo==$numberOfPeople) {
+                            //this message goes to Kris
+                            sendPlainMessage('benferris2@gmail.com', 'Problem Resolving Scheduling Conflict', '<p style="font-size:16px;font-family:Arial;">All contacted people have responded "no" to '.$selectedResolution['requester']['name'].'\'s request to fill '.$selectedResolution['position'].' on '.$selectedResolution['weekendDate'],'</p>');
+                        }
+
                     }
                 }
             }
