@@ -39,8 +39,8 @@ require('Resolution.php'); //defines Resolution class
 
 
 //fetches the details of the plan to be resolved
+//todo: this should probably be a "get plan" function that takes a planID and returns a plan, so that it can be used in other functions, eliminating the need for globals
 function getPlanToResolve(){
-
     global $oauth, $request;
     $oauth->fetch('https://www.planningcenteronline.com/plans/'.$request->planID.'.json');
     $planJSON=$oauth->getLastResponse();
@@ -67,7 +67,7 @@ function getNeededPosition($planToResolve, $requesterID){
             $position = $value->position;
         }
     }
-return $position;
+    return $position;
 }
 
 
@@ -192,14 +192,13 @@ function sendCreationRequestEmails($newResolution)
 {
 
     foreach ($newResolution->contacts as $personToContact) {
-        //send person an email
+        //send person an email (send to $personToContact->email)
         sendMessage('benferris2@gmail.com', 'Scheduling Request', $personToContact->firstName, $personToContact->position, $personToContact->currentlyScheduledWeekend, $newResolution->position, $newResolution->weekendDate, $newResolution->resolutionID, $personToContact->planningCenterID,$newResolution->expirationDate->format('F jS').' at '.$newResolution->expirationDate->format('g:i A'));
 
 
     }
 
 }
-
 
 
 
@@ -217,8 +216,3 @@ if(verifyCreationTime($planToResolve)) {
 
 }else
     echo "Please contact Kris Rinas at 317-379-3389 and he will work with you to find a trade.";
-
-
-
-
-
