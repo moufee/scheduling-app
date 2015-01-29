@@ -18,8 +18,8 @@
 <body>
 <div class="container">
 <?php
-//error_reporting(E_ALL);
-//ini_set("display_errors", 1);
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 require_once('checkresolutions.php');
 require_once('email.php');
 require_once('Person.php');
