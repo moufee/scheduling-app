@@ -47,12 +47,13 @@ if($resolution){
             if($contact['planningCenterID']==$_GET['responderID']){
                 if($_GET['response']=='yes'){
                     $contact['response'] = 'yes';
+                    $resolution['resolver'] = $contact;
                     if($collection->update($query,array('$set' =>array('isResolved'=>true,'contacts.'.$index.'.response' =>'yes','resolver'=>$contact)))) {
                         echo '<div class="alert alert-success"><h1>Your response has been received.</h1>
                                 <h3>A scheduler has been notified to make the required changes.</h3></div>';
                         //todo: send emails
                         //should send to Kris or scheduler
-                        sendSchedulingInstructions('benferris2@gmail.com',$resolution['requester']['name'],$resolution['position'],$resolution['resolver']['currentlyScheduledWeekend'],$resolution['resolver']['name'],$resolution['position'],$resolution['weekendDate']);
+                        sendSchedulingInstructions('benferris2@gmail.com',$resolution['requester']['name'],$resolution['resolver']['position'],$resolution['resolver']['currentlyScheduledWeekend'],$resolution['resolver']['name'],$resolution['position'],$resolution['weekendDate']);
                         //sendResolutionNotification('krisr@gracechurchin.org',$resolution->requester->name,$resolution['position'],$resolution['resolver']['currentlyScheduledWeekend'],$resolution->resolver->name,$resolution['position'],$resolution['weekendDate']);
                         //goes to selectedResolution->requester->email, notifies requester of his/her new weekend
                         sendPlainMessage('benferris2@gmail.com','Your request has been resolved','<p style="font-size:16px;font-family:Arial;">'.$resolution['requester']['firstName'].',</p><p style="font-size:16px;">Your request to find a replacement for your scheduled weekend, '.$resolution['weekendDate'].', has been successfully resolved. You will be scheduled on <strong>'.$resolution['resolver']['currentlyScheduledWeekend'].'</strong> instead of '.$resolution['weekendDate'].'. A scheduler has been notified to make these changes.</p>');
