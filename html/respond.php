@@ -80,7 +80,7 @@ if($resolution){
                         }
                         if($numberRespondingNo==$numberOfPeople) {
                             //this message goes to Kris
-                            sendPlainMessage('benferris2@gmail.com', 'Problem Resolving Scheduling Conflict', '<p style="font-size:16px;font-family:Arial;">All contacted people have responded "no" to '.$resolution['requester']['name'].'\'s request to fill '.$resolution['position'].' on '.$resolution['weekendDate'],'</p>');
+                            sendPlainMessage('benferris2@gmail.com', 'Problem Resolving Scheduling Conflict', '<p style="font-size:16px;font-family:Arial;">All contacted people have responded "no" to '.$resolution['requester']['name'].'\'s request to fill '.$resolution['position'].' on '.$resolution['weekendDate'],'.</p>');
                         }
                     }
                 }
