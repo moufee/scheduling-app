@@ -147,11 +147,11 @@ function calculateExpirationDate($planToResolve){
     $planDate->setTime(12,0);                   //noon switchover to 24 hr expiration time
     $difference = $planDate->diff($currentDate);
     if($difference->days<7) {
-        $expirationInterval = new DateInterval('PT3M'); //P1D - one day to respond if submitted less than a week in advance
+        $expirationInterval = new DateInterval('PT5M'); //P1D - one day to respond if submitted less than a week in advance
 
     }
     else {
-        $expirationInterval = new DateInterval('PT3M'); //P3D - a period of 3 days to respond if submitted more than a week in advance
+        $expirationInterval = new DateInterval('PT5M'); //P3D - a period of 3 days to respond if submitted more than a week in advance
     }
     $expirationDate = $currentDate->add($expirationInterval);
     return $expirationDate;
