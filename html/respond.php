@@ -62,7 +62,7 @@ if($resolution){
                         foreach($resolution['contacts'] as $contactInner) {
                             if ($contactInner['planningCenterID'] != $resolution['resolver']['planningCenterID'] && $contactInner['response'] == null) //do not send to resolver or person that has responded
                                 //send to $contactInner->email
-                                sendPlainMessage('benferris2@gmail.com', 'Request Resolved', '<p style="font-size:16px;font-family:Arial;">' . $contact->firstName . ',</p><p style="font-size:16px;font-family:Arial;">The request you received to fill ' . $resolution['position'] . ' on ' . $resolution['weekendDate'] . ' has been resolved. You no longer need to respond.');
+                                sendPlainMessage('benferris2@gmail.com', 'Request Resolved', '<p style="font-size:16px;font-family:Arial;">' . $contact['firstName'] . ',</p><p style="font-size:16px;font-family:Arial;">The request you received to fill ' . $resolution['position'] . ' on ' . $resolution['weekendDate'] . ' has been resolved. You no longer need to respond.');
                         }
                     }
                 }elseif($_GET['response']=='no'){
