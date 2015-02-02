@@ -1,7 +1,6 @@
 <?php
 header('Content-Type: application/json');
 require_once("oauth_config.php");
-require_once('email.php');
 require('mongo-connect.php');
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
@@ -95,7 +94,7 @@ switch ($_GET['requesting']){
     case'myRequests':
         $myRequests = array();
         $query = array('requester.planningCenterID'=>$user->id);
-        $cursor = $collection->find($query);
+        $cursor = $collection->find(array('requester.planningCenterID'=>$user->id));
         print_r($cursor);
             while($cursor->hasNext()){
                 array_push($myRequests,$cursor->getNext());
@@ -113,7 +112,6 @@ switch ($_GET['requesting']){
                 array_push($resolutions,$value);
             }
             echo json_encode($resolutions);
-            //echo file_get_contents('../../resolutions.json');
         }
         else echo 'permissionError';
         break;
