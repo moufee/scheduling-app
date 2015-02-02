@@ -24,7 +24,7 @@ schedulingApp.controller('myRequestsCtrl',function($scope, $http, Auth, Resoluti
         console.log(data);
         $scope.resolutions=data.reverse();
 
-    })
+    });
 
     $scope.cancelResolution = function(id){
         if(confirm('Are you sure you want to cancel this request?')){
