@@ -102,7 +102,7 @@ switch ($_GET['requesting']){
             while($cursor->hasNext()){
                 array_push($myRequests,$cursor->getNext());
             }
-        echo print_r($cursor);
+        echo print_r($resolutions);
         /*foreach($resolutions as $resolution){
             if($resolution->requester->planningCenterID==$user->id){
                 array_push($myRequests,$resolution);
