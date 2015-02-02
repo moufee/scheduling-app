@@ -1,4 +1,4 @@
-angular.module('dataService',['ngCookies'])
+angular.module('dataService',[])
 
     .factory('Auth',function($http){
 
@@ -32,7 +32,7 @@ angular.module('dataService',['ngCookies'])
         return resolutionsFactory;
     })
 
-    .factory('PCO',function($http,$cookies){
+    .factory('PCO',function($http){
         var PCOFactory = {};
         PCOFactory.me = function(){
             return $http.get('getdata.php',{'params':{'requesting':'me'}});
