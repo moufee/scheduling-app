@@ -97,18 +97,10 @@ switch ($_GET['requesting']){
         //$resolutions = json_decode(file_get_contents('../../resolutions.json'));
         $resolutions = array();
         $query = array('requester.planningCenterID'=>$user->id);
-        echo $user->id;
         $cursor = $collection->find($query);
-            while($cursor->hasNext()){
-                array_push($myRequests,$cursor->getNext());
-            }
-        echo print_r($resolutions);
-        /*foreach($resolutions as $resolution){
-            if($resolution->requester->planningCenterID==$user->id){
-                array_push($myRequests,$resolution);
-            }
-
-        }*/
+        foreach($cursor as $id=>$value){
+            array_push($resolutions,$value);
+        }
         echo json_encode($myRequests);
 
         break;
