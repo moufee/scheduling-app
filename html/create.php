@@ -188,16 +188,59 @@ function assembleResolution($planToResolve,$position,$peopleToContact){
 
 }
 
-function sendCreationRequestEmails($newResolution)
-{
-
+function sendCreationRequestEmails($newResolution){
+    $mergeVars = array();
+    $to = array();
     foreach ($newResolution->contacts as $personToContact) {
+        array_push($mergeVars,
+            array(
+                'rcpt' => $personToContact->email,
+                'vars' => array(
+                    array(
+                        'name' => 'name',
+                        'content' => $personToContact->name
+                    ),
+                    array(
+                        'name' => 'scheduledposition',
+                        'content' => $personToContact->position
+                    ),
+                    array(
+                        'name' => 'scheduledweekend',
+                        'content' => $personToContact->currentlyScheduledWeekend
+                    ),
+                    array(
+                        'name' => 'neededposition',
+                        'content' => $newResolution->position
+                    ),
+                    array(
+                        'name' => 'neededweekend',
+                        'content' => $newResolution->weekendDate
+                    ),
+                    array(
+                        'name' => 'yeslink',
+                        'content' => RESPOND_URL . '?response=yes&responderID=' . $personToContact->planningCenterID . '&resolutionID=' . $newResolution->resolutionID
+                    ),
+                    array(
+                        'name' => 'nolink',
+                        'content' => RESPOND_URL . '?response=no&responderID=' . $personToContact->planningCenterID . '&resolutionID=' . $newResolution->resolutionID
+                    ),
+                    array(
+                        'name' => 'expirationdate',
+                        'content' => $newResolution->expirationDate->format('F jS').' at '.$newResolution->expirationDate->format('g:i A')
+                    )
+                )
+            )
+        );
+        array_push($to,
+            array(
+                'email' => $personToContact->email,
+                'name' => $personToContact->name,
+                'type' => 'to'
+            )
+        );
         //send person an email (send to $personToContact->email)
-        sendMessage('benferris2@gmail.com', 'Scheduling Request', $personToContact->firstName, $personToContact->position, $personToContact->currentlyScheduledWeekend, $newResolution->position, $newResolution->weekendDate, $newResolution->resolutionID, $personToContact->planningCenterID,$newResolution->expirationDate->format('F jS').' at '.$newResolution->expirationDate->format('g:i A'));
-
-
+        sendSchedulingRequest('benferris2@gmail.com', $personToContact->firstName, $personToContact->position, $personToContact->currentlyScheduledWeekend, $newResolution->position, $newResolution->weekendDate, $newResolution->resolutionID, $personToContact->planningCenterID,$newResolution->expirationDate->format('F jS').' at '.$newResolution->expirationDate->format('g:i A'));
     }
-
 }
 
 

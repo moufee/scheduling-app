@@ -5,7 +5,7 @@ if(getenv('SEND_MAIL')) {
     require_once('Mandrill.php');
     $respond_url = "http://grace-scheduling-testing.herokuapp.com/respond.php";
     define('RESPOND_URL', 'http://grace-scheduling-testing.herokuapp.com/respond.php');
-    function sendMessage($to, $subject, $name, $currentPosition, $currentWeekend, $neededPosition, $neededWeekend, $resolutionID, $personID, $expirationDate)
+    function sendSchedulingRequest($to, $name, $currentPosition, $currentWeekend, $neededPosition, $neededWeekend, $resolutionID, $personID, $expirationDate)
     {
         try {
             $mandrill = new Mandrill('1B54QfE4NOp7pkt0a7XCrA');
@@ -17,7 +17,7 @@ if(getenv('SEND_MAIL')) {
                 )
             );
             $message = array(
-                'subject' => $subject,
+                'subject' => 'Scheduling Request',
                 'from_email' => 'productionScheduling@dev.floret.us',
                 'from_name' => 'Production Scheduling',
                 'to' => array(
@@ -43,10 +43,7 @@ if(getenv('SEND_MAIL')) {
                 'return_path_domain' => null,
                 'merge' => true,
                 'global_merge_vars' => array(
-                    array(
-                        'name' => 'neededweekend',
-                        'content' => 'merge1 content'
-                    )
+                    array()
                 ),
                 'merge_vars' => array(
                     array(

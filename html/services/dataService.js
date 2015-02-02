@@ -1,4 +1,4 @@
-angular.module('dataService',[])
+angular.module('dataService',['ngCookies'])
 
     .factory('Auth',function($http){
 
@@ -32,10 +32,10 @@ angular.module('dataService',[])
         return resolutionsFactory;
     })
 
-    .factory('PCO',function($http){
+    .factory('PCO',function($http,$cookies){
         var PCOFactory = {};
         PCOFactory.me = function(){
-            return $http.get('getdata.php',{params:{'requesting':'me'}});
+            return $http.get('getdata.php',{'params':{'requesting':'me'}});
         };
         PCOFactory.scheduledPlans = function(serviceTypeID,selectedWeekendID,userID){
             return $http.get('getdata.php',{params:{'requesting':'scheduledPlans','serviceTypeID':serviceTypeID,'selectedWeekendID':selectedWeekendID,'userID':userID}});
