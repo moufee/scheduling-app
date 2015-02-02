@@ -94,14 +94,13 @@ switch ($_GET['requesting']){
         break;
     case'myRequests':
         $myRequests = array();
-        //$resolutions = json_decode(file_get_contents('../../resolutions.json'));
         $resolutions = array();
         $query = array('requester.planningCenterID'=>$user->id);
         $cursor = $collection->find($query);
         foreach($cursor as $id=>$value){
             array_push($resolutions,$value);
         }
-        echo json_encode($myRequests);
+        echo json_encode($resolutions);
 
         break;
 
