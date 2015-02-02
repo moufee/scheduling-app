@@ -3,8 +3,8 @@ header('Content-Type: application/json');
 require_once("oauth_config.php");
 require_once('email.php');
 require('mongo-connect.php');
-//error_reporting(E_ALL);
-//ini_set("display_errors", 1);
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
 define('ACCESS_TOKEN_KEY', 'I9MsYDyPFhjpcd3NvmJD');
 define('ACCESS_TOKEN_SECRET', 'QNQQ7MF2iNpJUayzR7aOpQcXc8xKaaLCLysTk93k');
