@@ -8,8 +8,8 @@ $currentTime = $currentDate->getTimestamp();
 //find resolutions that are not resolved, canceled, or have already been marked as expired, but have passed their expiration date
 $query = array('isExpired'=>false,'isResolved'=>false,'isCancelled'=>false,'expirationDate_unix'=>array('$lte'=>$currentTime));
 $cursor = $collection->find($query);
-while($cursor->hasNext()){
-    array_push($resolutions,$cursor->getNext());
+foreach($cursor as $resolution){
+    array_push($resolutions,$resolution);
 }
 if(count($resolutions)>0){
     $collection->update($query,array('$set'=>array('isExpired'=>true)));
